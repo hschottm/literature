@@ -1,0 +1,20 @@
+<?php if (count($this->lists)): ?>
+<?php foreach ($this->lists as $list => $listitems): ?>
+<table cellpadding="0" cellspacing="0" class="all_records" summary="">
+<thead>
+  <tr>
+    <th class="head"><?php echo $list; ?></th>
+  </tr>
+</thead>
+<tbody>
+<?php $classes = array('even', 'odd'); $counter = 0; ?>
+<?php foreach ($listitems as $id): ?>
+  <tr class="<?php echo $classes[$counter % 2]; ?>">
+    <td class="body"><?php echo $this->references[$id]; ?></td>
+  </tr>
+<?php $counter++; ?>
+<?php endforeach; ?>
+</tbody>
+</table>
+<?php endforeach; ?>
+<?php endif; ?>

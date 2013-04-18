@@ -1,0 +1,206 @@
+<?php
+$result = "";
+$strAuthors = "";
+$authors = array_values($this->authors);
+if (is_array($authors))
+{
+	for ($i = 0; $i < count($authors); $i++)
+	{
+		$strAuthors .= trim($authors[$i][1]);
+		if (strlen(trim($authors[$i][0])))
+		{
+			$strAuthors .= ", " . trim($authors[$i][0]);
+		}
+		if ($i < count($authors) - 2)
+		{
+			$strAuthors .= ", ";
+		}
+		elseif ($i == count($authors) - 2)
+		{
+			$strAuthors .= " &amp; ";
+		}
+	}
+}
+$strEditors = "";
+$editors = array_values($this->editors);
+if (is_array($editors))
+{
+	for ($i = 0; $i < count($editors); $i++)
+	{
+		$strEditors .= trim($editors[$i][1]);
+		if (strlen(trim($editors[$i][0])))
+		{
+			$strEditors .= ", " . trim($editors[$i][0]);
+		}
+		if ($i < count($editors) - 2)
+		{
+			$strEditors .= ", ";
+		}
+		elseif ($i == count($editors) - 2)
+		{
+			$strEditors .= " &amp; ";
+		}
+	}
+	if (strlen($strEditors))
+	{
+		$strEditor .= " (" . ((count($editors) == 1) ? $this->editorShort : $this->editorsShort) . "), ";
+	}
+}
+
+$result .= $strAuthors;
+if (strlen($this->released))
+{
+	$result .= " (" . $this->released . ")";
+}
+if (strlen($result)) $result .= ". ";
+
+switch ($this->literature_type)
+{
+	case "periodic":
+		$result .= $this->title_periodic;
+		if (strlen($this->title_info))
+		{
+			$result .= " (" . $this->title_info . ")";
+		}
+		$result .= ". ";
+		$result .= "<u>";
+		$result .= $this->title_journal;
+		if (strlen($this->volume) || strlen($this->issue))
+		{
+			$result .= ", ";
+			if (strlen($this->volume))
+			{
+				$result .= $this->volume;
+			}
+			if (strlen($this->issue))
+			{
+				if (strlen($this->volume)) $result .= " ";
+				$result .= "(" . $this->issue . ")";
+			}
+		}
+		$result .= "</u>";
+		if (strlen($this->pages))
+		{
+			$result .= ", " . $this->pages;
+		}
+		$result .= ".";
+		break;
+	case "nonperiodic":
+		$result .= "<u>";
+		$result .= $this->title;
+		$result .= "</u>";
+		if (strlen($this->title_info))
+		{
+			$result .= " (" . $this->title_info . ")";
+		}
+		if (strlen($this->title_source))
+		{
+			$result .= " [" . $this->title_source . "]";
+		}
+		$result .= ". ";
+		if (strlen($this->location))
+		{
+			$result .= $this->location;
+			if (strlen($this->publisher)) $result .= ": ";
+		}
+		if (strlen($this->publisher))
+		{
+			$result .= $this->publisher;
+		}
+		if ((strlen($this->location)) || (strlen($this->publisher))) $result .= ".";
+		break;
+	case "nonperiodicpart":
+		$result .= $this->title_nonperiodicpart;
+		if (strlen($this->title_info))
+		{
+			$result .= " (" . $this->title_info . ")";
+		}
+		$result .= ". ";
+		$result .= $this->strIn . " ";
+		$result .= $strEditors;
+		
+		$result .= ", <u>";
+		$result .= $this->title_act;
+		$result .= "</u>";
+		if (strlen($this->title_act_info))
+		{
+			$result .= " (" . $this->title_act_info . ")";
+		}
+		if (strlen($this->title_source))
+		{
+			$result .= " [" . $this->title_source . "]";
+		}
+		if (strlen($this->pages))
+		{
+			$result .= " (" . $this->strPageShort . " " . $this->pages . ")";
+		}
+		$result .= ". ";
+		if (strlen($this->location))
+		{
+			$result .= $this->location;
+			if (strlen($this->publisher)) $result .= ": ";
+		}
+		if (strlen($this->publisher))
+		{
+			$result .= $this->publisher;
+		}
+		if ((strlen($this->location)) || (strlen($this->publisher))) $result .= ".";
+		break;
+	default:
+		return $this->title;
+		break;
+}
+
+if (strlen($this->uri))
+{
+	$result .= " ";
+	$result .= $this->strAvailableAt;
+	$result .= ": ";
+	$result .= "<a href=\"" . $this->uri . "\">" . $this->urishort . ((strlen($this->urishort) != strlen($this->uri)) ? '<span class="shortened">[...]</span>' : '') . "</a>";
+	if (strlen($this->uri_date))
+	{
+		$result .= " [" . date($this->strDateFormat, $this->uri_date) . "]";
+	}
+}
+if (strlen($this->isbn))
+{
+	if (strlen($this->uri)) $result .= ".";
+	$result .= " ISBN: " . $this->isbn;
+}
+echo $result;
+?>
+<?php if ($this->addImage): ?>
+
+<div class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin || $this->float): ?> style="<?php echo trim($this->margin . $this->float); ?>"<?php endif; ?>>
+<?php if ($this->href): ?>
+<a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
+<?php endif; ?>
+<img src="<?php echo $this->src; ?>"<?php echo $this->imgSize; ?> alt="<?php echo $this->alt; ?>" />
+<?php if ($this->href): ?>
+</a>
+<?php endif; ?>
+<?php if ($this->caption): ?>
+<div class="caption"><?php echo $this->caption; ?></div>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php if ($this->addBefore): ?>
+
+<?php echo $this->text; ?>
+<?php endif; ?>
+
+<?php if (is_array($this->files)): ?>
+<!-- indexer::stop -->
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php if ($this->downtitle): ?>
+
+<p class="downloadtitle"><?php echo $this->downtitle; ?></p>
+<?php endif; ?>
+
+<?php foreach ($this->files as $file): ?>
+<p><img src="<?php echo $file['icon']; ?>" width="18" height="18" alt="" class="mime_icon" /> <a href="<?php echo $file['href']; ?>" title="<?php echo $file['title']; ?>"><?php echo $file['link']; ?> <span class="size">(<?php echo $file['filesize']; ?>)</span></a></p>
+<?php endforeach; ?>
+
+</div>
+<!-- indexer::continue -->
+<?php endif; ?>

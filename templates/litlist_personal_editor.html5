@@ -1,0 +1,38 @@
+<div id="tl_box">
+	<h3><?php echo $this->strNewList; ?></h3>
+	<input id="ctrl_listadd" class="text" name="listadd" />
+	<input type="submit" class="submit" name="add_list" value="<?php echo $this->strAdd; ?>" />
+</div>
+<?php if (count($this->lists)): ?>
+<?php foreach ($this->lists as $list => $listitems): ?>
+<table cellpadding="0" cellspacing="0" class="all_records" summary="">
+<thead>
+	<tr>
+		<th class="head" colspan="2">
+			<?php echo $list; ?> 
+		</th>
+	</tr>
+</thead>
+<tbody>
+	<tr class="commands">
+		<td colspan="2">
+			<input type="submit" class="submit" name="addLiteratureEntry[<?php echo $list; ?>]" value="<?php echo $this->strAddLiterature; ?>" />
+			<input type="submit" class="submit" name="removeList[<?php echo $list; ?>]" value="<?php echo $this->strRemoveList; ?>" onclick="javascript:return confirm('<?php echo $this->strConfirmRemoveList; ?>')" />
+		</td>
+	</tr>
+<?php $classes = array('even', 'odd'); $counter = 0; ?>
+<?php foreach ($listitems as $id): ?>
+  <tr class="<?php echo $classes[$counter % 2]; ?>">
+    <td class="body"><input type="checkbox" name="remove[<?php echo $list; ?>][]" id="remove[<?php echo $list; ?>][<?php echo $id; ?>]" value="<?php echo $id; ?>" /></td>
+    <td class="body"><label for="remove[<?php echo $list; ?>][<?php echo $id; ?>]"><?php echo $this->references[$id]; ?></label></td>
+  </tr>
+<?php $counter++; ?>
+<?php endforeach; ?>
+</tbody>
+</table>
+<?php endforeach; ?>
+<?php endif; ?>
+<div class="submit_container">
+<input type="submit" class="submit" name="removeLiteraturePersonalPage" value="<?php echo $this->strRemoveSelected; ?>" />
+<input type="submit" class="submit" name="saveLiteraturePersonalPage" value="<?php echo $this->strSave; ?>" />
+</div>
