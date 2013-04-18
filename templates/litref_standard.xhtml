@@ -119,7 +119,14 @@ switch ($this->literature_type)
 		$result .= $this->strIn . " ";
 		$result .= $strEditors;
 		
-		$result .= ", <u>";
+		if (strlen($strEditors))
+		{
+			$result .= ", <u>";
+		}
+		else
+		{
+			$result .= "<u>";
+		}
 		$result .= $this->title_act;
 		$result .= "</u>";
 		if (strlen($this->title_act_info))
