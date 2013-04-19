@@ -105,6 +105,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['lit_tags'] = array
 	'inputType'               => 'tag',
 	'eval'                    => array('table' => 'tl_literature', 'isTag' => FALSE, 'tl_class'=>'clr long'),
 	'sql'                     => "blob NULL"
-)
+);
 
 ?>
