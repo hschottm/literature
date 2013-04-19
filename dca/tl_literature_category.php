@@ -1,28 +1,10 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
- *
- * PHP version 5
- * @copyright  Helmut Schottmüller 2008 
- * @author     Helmut Schottmüller <typolight@aurealis.de>
- * @package    literature
- * @license    LGPL
+ * @copyright  Helmut Schottmüller 2009-2013
+ * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
+ * @package    literature 
+ * @license    LGPL 
  * @filesource
  */
 
@@ -30,8 +12,8 @@
  * Class tl_literature_category
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Helmut Schottmüller 2008 
- * @author     Helmut Schottmüller <typolight@aurealis.de>
+ * @copyright  Helmut Schottmüller 2009-2013
+ * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
  * @package    Controller
  */
 class tl_literature_category extends Backend
@@ -50,7 +32,14 @@ $GLOBALS['TL_DCA']['tl_literature_category'] = array
 		'dataContainer'               => 'Table',
 		'ctable'                      => array('tl_literature'),
 		'switchToEdit'                => true,
-		'enableVersioning'            => true
+		'enableVersioning'            => true,
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
+		)
 	),
 
 	// List
@@ -117,6 +106,14 @@ $GLOBALS['TL_DCA']['tl_literature_category'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'title' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature_category']['title'],
@@ -124,14 +121,16 @@ $GLOBALS['TL_DCA']['tl_literature_category'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'insertTag'=>true)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'insertTag'=>true),
+			'sql'                     => "varchar(100) NOT NULL default ''"
 		),
 		'description' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature_category']['description'],
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('allowHtml'=>true, 'style'=>'height:80px;')
+			'eval'                    => array('allowHtml'=>true, 'style'=>'height:80px;'),
+			'sql'                     => "text NOT NULL"
 		),
 	)
 );

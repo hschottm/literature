@@ -37,8 +37,8 @@ array_insert($GLOBALS['BE_MOD']['content'], 3, array
 				"tl_literature_category", "tl_literature"
 			),
 		'import' => array('LiteratureTools', 'importLiterature'),
-		'icon' => 'system/modules/literature/html/images/literature.png',
-		'stylesheet' => 'system/modules/literature/html/css/literature.css'
+		'icon' => 'system/modules/literature/assets/literature.png',
+		'stylesheet' => 'system/modules/literature/assets/literature.css'
 	)
 ));
 

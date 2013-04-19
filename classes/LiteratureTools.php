@@ -1,19 +1,21 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
- * @copyright  Helmut Schottmüller 2011
- * @author     Helmut Schottmüller <contao@aurealis.de>
- * @package    literature
- * @license    LGPL
+ * @copyright  Helmut Schottmüller 2009-2013
+ * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
+ * @package    literature 
+ * @license    LGPL 
+ * @filesource
  */
 
+namespace Contao;
 
 /**
  * Class LiteratureTools
  *
  * Provide methods to handle literature import
- * @copyright  Helmut Schottmüller 2011
- * @author     Helmut Schottmüller <contao@aurealis.de>
+ * @copyright  Helmut Schottmüller 2009-2013
+ * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
  * @package    Controller
  */
 class LiteratureTools extends Backend
@@ -22,34 +24,33 @@ class LiteratureTools extends Backend
 
 	public function importLiterature()
 	{
-		if ($this->Input->get('key') != 'import')
+		if (\Input::get('key') != 'import')
 		{
-			$this->redirect(str_replace('&key=import', '', $this->Environment->request));
+			$this->redirect(str_replace('&key=import', '', \Environment::get('request')));
 		}
 
-		$this->Template = new BackendTemplate('be_import_literature');
+		$this->Template = new \BackendTemplate('be_import_literature');
 
-		$this->Template->literaturefile = $this->getFileTreeWidget($this->Input->post('literaturefile'));
-		$this->Template->hrefBack = ampersand(str_replace('&key=import', '', $this->Environment->request));
+		$this->Template->literaturefile = $this->getFileTreeWidget(\Input::post('literaturefile'));
+		$this->Template->hrefBack = ampersand(str_replace('&key=import', '', \Environment::get('request')));
 		$this->Template->goBack = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->headline = $GLOBALS['TL_LANG']['tl_literature']['import'][1];
-		$this->Template->request = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+		$this->Template->request = ampersand(\Environment::get('request'), ENCODE_AMPERSANDS);
 		$this->Template->submit = specialchars($GLOBALS['TL_LANG']['MSC']['continue']);
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_import_literature')
+		if (\Input::post('FORM_SUBMIT') == 'tl_import_literature')
 		{
-			$filename = $this->Template->literaturefile->value;
-			if (strlen($filename))
+			$f = \FilesModel::findOneById($this->Template->literaturefile->value);
+			if ($f)
 			{
-				$f = new File($filename);
 				switch ($f->extension)
 				{
 					case 'bib':
-						$this->importBibTeX($f);
+						$this->importBibTeX(new \File($f->path));
 						break;
 					default:
 						break;
 				}
-				$this->redirect(str_replace('&key=import', '', $this->Environment->request));
+				$this->redirect(str_replace('&key=import', '', \Environment::get('request')));
 			}
 		}
 		return $this->Template->parse();
@@ -57,14 +58,8 @@ class LiteratureTools extends Backend
 	
 	protected function importBibTeX(File $f)
 	{
-		require_once(TL_ROOT . '/plugins/bibtexParse/PARSEENTRIES.php'); 
-		require_once(TL_ROOT . '/plugins/bibtexParse/PARSECREATORS.php'); 
-		$parse = new PARSEENTRIES();
+		$parse = new \PARSEENTRIES();
 		$parse->expandMacro = true;
-	//	$array = array("RMP" =>"Rev., Mod. Phys.");
-	//	$parse->loadStringMacro($array);
-	//	$parse->removeDelimit = FALSE;
-	//	$parse->fieldExtract = FALSE;
 		$parse->openBib(TL_ROOT . '/' . $f->value);
 		$parse->extractEntries();
 		$parse->closeBib();
@@ -75,7 +70,7 @@ class LiteratureTools extends Backend
 			foreach ($entries as $entry)
 			{
 				$authordata = $entry['author'];
-				$creator = new PARSECREATORS();
+				$creator = new \PARSECREATORS();
 				$authors = $creator->parse($authordata);
 				$editors = array();
 				if (array_key_exists('editor', $entry))
@@ -137,7 +132,7 @@ class LiteratureTools extends Backend
 						$title_info = (array_key_exists('series', $entry)) ? $entry['series'] : '';
 						$stmt = $this->Database->prepare("INSERT INTO tl_literature (pid, literature_type, titlesort, title, title_periodic, title_nonperiodicpart, title_info, title_source, title_act, title_act_info, title_journal, pages, volume, issue, location, publisher, released, isbn, issn, uri, uri_date, authors, editors, abstract, tstamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 							->execute(
-								$this->Input->get('id'), 
+								\Input::get('id'), 
 								$literature_type,
 								$titlesort,
 								'',
@@ -171,7 +166,7 @@ class LiteratureTools extends Backend
 						$title_info = (array_key_exists('series', $entry)) ? $entry['series'] : '';
 						$stmt = $this->Database->prepare("INSERT INTO tl_literature (pid, literature_type, titlesort, title, title_periodic, title_nonperiodicpart, title_info, title_source, title_act, title_act_info, title_journal, pages, volume, issue, location, publisher, released, isbn, issn, uri, uri_date, authors, editors, abstract, tstamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 							->execute(
-								$this->Input->get('id'), 
+								\Input::get('id'), 
 								$literature_type,
 								$titlesort,
 								(array_key_exists('title', $entry)) ? $entry['title'] : '',
@@ -206,7 +201,7 @@ class LiteratureTools extends Backend
 						$title_info = (array_key_exists('series', $entry)) ? $entry['series'] : '';
 						$stmt = $this->Database->prepare("INSERT INTO tl_literature (pid, literature_type, titlesort, title, title_periodic, title_nonperiodicpart, title_info, title_source, title_act, title_act_info, title_journal, pages, volume, issue, location, publisher, released, isbn, issn, uri, uri_date, authors, editors, abstract, tstamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 							->execute(
-								$this->Input->get('id'), 
+								\Input::get('id'), 
 								$literature_type,
 								$titlesort,
 								'',
@@ -291,7 +286,7 @@ class LiteratureTools extends Backend
 	 */
 	protected function getFileTreeWidget($value=null)
 	{
-		$widget = new FileTree();
+		$widget = new \FileTree();
 
 		$widget->id = 'literaturefile';
 		$widget->name = 'literaturefile';
@@ -312,7 +307,7 @@ class LiteratureTools extends Backend
 		}
 
 		// Valiate input
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_import_literature_fileselection')
+		if (\Input::post('FORM_SUBMIT') == 'tl_import_literature_fileselection')
 		{
 			$widget->validate();
 			if ($widget->hasErrors())

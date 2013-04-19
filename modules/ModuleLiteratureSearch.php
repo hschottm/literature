@@ -1,20 +1,20 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
- * PHP version 5
- * @copyright  Helmut Schottmüller 2013
- * @author     Helmut Schottmüller <contao@aurealis.de>
+ * @copyright  Helmut Schottmüller 2009-2013
+ * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
  * @package    literature 
  * @license    LGPL 
  * @filesource
  */
 
+namespace Contao;
 
 /**
  * Class ModuleLiteratureSearch
  *
- * @copyright  Helmut Schottmüller 2013
- * @author     Helmut Schottmüller <contao@aurealis.de>
+ * @copyright  Helmut Schottmüller 2009-2013
+ * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
  * @package    Fontend
  */
 class ModuleLiteratureSearch extends Module
@@ -39,7 +39,7 @@ class ModuleLiteratureSearch extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### LITERATURESEARCH ###';
 
 			return $objTemplate->parse();
@@ -86,7 +86,7 @@ class ModuleLiteratureSearch extends Module
 		);
 		foreach ($arrFields as $k=>$v)
 		{
-			$strOptions .= '  <option value="' . $k . '"' . (($k == $this->Input->get('search')) ? ' selected="selected"' : '') . '>' . $v . '</option>' . "\n";
+			$strOptions .= '  <option value="' . $k . '"' . (($k == \Input::get('search')) ? ' selected="selected"' : '') . '>' . $v . '</option>' . "\n";
 		}
 
 		$this->Template->search_fields = $strOptions;
@@ -94,18 +94,18 @@ class ModuleLiteratureSearch extends Module
 		$this->Template->fields_label = $GLOBALS['TL_LANG']['MSC']['all_fields'][0];
 		$this->Template->keywords_label = $GLOBALS['TL_LANG']['MSC']['keywords'];
 		$this->Template->search_label = specialchars($GLOBALS['TL_LANG']['MSC']['search']);
-		$this->Template->search = $this->Input->get('search');
-		$this->Template->for = $this->Input->get('for');
+		$this->Template->search = \Input::get('search');
+		$this->Template->for = \Input::get('for');
 		if ($this->jumpTo > 0)
 		{
 			$this->Template->id = $this->jumpTo;
 		}
 		else
 		{
-			$this->Template->id = $this->Input->get('id');
+			$this->Template->id = \Input::get('id');
 		}
-		$this->Template->order_by = $this->Input->get('order_by');
-		$this->Template->sort = $this->Input->get('sort');
+		$this->Template->order_by = \Input::get('order_by');
+		$this->Template->sort = \Input::get('sort');
 	}
 }
 

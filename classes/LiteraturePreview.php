@@ -1,37 +1,20 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
- *
- * PHP version 5
- * @copyright  Leo Feyer 2008 
- * @author     Leo Feyer 
+ * @copyright  Helmut Schottmüller 2009-2013
+ * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
  * @package    literature 
  * @license    LGPL 
  * @filesource
  */
 
+namespace Contao;
 
 /**
  * Class LiteraturePreview
  *
- * @copyright  Helmut Schottmüller 2008 
- * @author     Helmut Schottmüller <typolight@aurealis.de>
+ * @copyright  Helmut Schottmüller 2009-2013
+ * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
  * @package    Controller
  */
 class LiteraturePreview extends Frontend
@@ -142,7 +125,7 @@ class LiteraturePreview extends Frontend
 	 */
 	public function getPreview()
 	{
-		$objTemplate = new FrontendTemplate($this->template);
+		$objTemplate = new \FrontendTemplate($this->template);
 		$objTemplate->authors = $this->arrAuthors;
 		$objTemplate->editors = $this->arrEditors;
 		$objTemplate->released = $this->arrData["released"];
@@ -202,7 +185,7 @@ class LiteraturePreview extends Frontend
 			// Single files
 			if (is_file(TL_ROOT . '/' . $file))
 			{
-				$objFile = new File($file);
+				$objFile = new \File($file);
 
 				if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($file)))
 				{
@@ -218,7 +201,7 @@ class LiteraturePreview extends Frontend
 					(
 						'link' => $arrMeta[0],
 						'title' => $arrMeta[0],
-						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&' : '?') . 'file=' . $this->urlEncode($file),
+						'href' => \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'file=' . $this->urlEncode($file),
 						'caption' => $arrMeta[2],
 						'filesize' => $this->getReadableSize($objFile->filesize, 1),
 						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
@@ -242,7 +225,7 @@ class LiteraturePreview extends Frontend
 					continue;
 				}
 
-				$objFile = new File($file . '/' . $subfile);
+				$objFile = new \File($file . '/' . $subfile);
 
 				if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($subfile)))
 				{
@@ -257,7 +240,7 @@ class LiteraturePreview extends Frontend
 					(
 						'link' => $arrMeta[0],
 						'title' => $arrMeta[0],
-						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&' : '?') . 'file=' . $this->urlEncode($file . '/' . $subfile),
+						'href' => \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'file=' . $this->urlEncode($file . '/' . $subfile),
 						'caption' => $arrMeta[2],
 						'filesize' => $this->getReadableSize($objFile->filesize, 1),
 						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,

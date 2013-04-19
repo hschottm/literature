@@ -1,28 +1,10 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
- *
- * PHP version 5
- * @copyright  Helmut Schottmüller 2008 
- * @author     Helmut Schottmüller <typolight@aurealis.de>
- * @package    literature
- * @license    LGPL
+ * @copyright  Helmut Schottmüller 2009-2013
+ * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
+ * @package    literature 
+ * @license    LGPL 
  * @filesource
  */
 
@@ -44,8 +26,16 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 		'ptable'                      => 'tl_literature_category',
 		'ctable'                      => array('tl_literature_author', 'tl_literature_editor'),
 		'onload_callback'             => array(array('tl_literature', 'moduleUpdate')),
-		'ondelete_callback'             => array(array('tl_literature', 'deleteLiterature')),
-		'enableVersioning'            => true
+		'ondelete_callback'           => array(array('tl_literature', 'deleteLiterature')),
+		'enableVersioning'            => true,
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index'
+			)
+		)
 	),
 
 	// List
@@ -134,6 +124,18 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'authors' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature']['authors'],
@@ -162,7 +164,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 						'rcopy' => $GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_copy'], 
 						'rdelete' => $GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_delete']
 					)
-				)
+				),
+			'sql'                     => "blob NULL"
 		),
 		'authorssort' => array
 		(
@@ -172,7 +175,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'editors' => array
 		(
@@ -203,7 +207,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 						'rcopy' => $GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_copy'], 
 						'rdelete' => $GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_delete']
 					)
-				)
+				),
+			'sql'                     => "blob NULL"
 		),
 		'literature_type' => array
 		(
@@ -213,7 +218,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'inputType'               => 'select',
 			'options'                 => array('periodic', 'nonperiodic', 'nonperiodicpart'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_literature']['literature_type'],
-			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(15) NOT NULL default ''"
 		),
 		'titlesort' => array
 		(
@@ -224,28 +230,32 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
-			'save_callback'           => array(array('tl_literature', 'saveTitleSort'))
+			'save_callback'           => array(array('tl_literature', 'saveTitleSort')),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'title' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature']['title'],
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
-			'save_callback'           => array(array('tl_literature', 'saveTitleSort'))
+			'save_callback'           => array(array('tl_literature', 'saveTitleSort')),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'title_periodic' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature']['title'],
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
-			'save_callback'           => array(array('tl_literature', 'saveTitleSort'))
+			'save_callback'           => array(array('tl_literature', 'saveTitleSort')),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'title_nonperiodicpart' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature']['title'],
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
-			'save_callback'           => array(array('tl_literature', 'saveTitleSort'))
+			'save_callback'           => array(array('tl_literature', 'saveTitleSort')),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'title_info' => array
 		(
@@ -253,7 +263,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>150, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>150, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(150) NOT NULL default ''"
 		),
 		'title_source' => array
 		(
@@ -262,19 +273,22 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>30, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>30, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(30) NOT NULL default ''"
 		),
 		'isbn' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature']['isbn'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>18, 'rgxp'=>'isbn', 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>18, 'rgxp'=>'isbn', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(18) NOT NULL default ''"
 		),
 		'issn' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature']['issn'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>18, 'rgxp'=>'issn', 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>18, 'rgxp'=>'issn', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(9) NOT NULL default ''"
 		),
 		'location' => array
 		(
@@ -284,7 +298,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>false, 'maxlength'=>100, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>false, 'maxlength'=>100, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(100) NOT NULL default ''"
 		),
 		'publisher' => array
 		(
@@ -294,7 +309,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>false, 'maxlength'=>100, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>false, 'maxlength'=>100, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(100) NOT NULL default ''"
 		),
 		'uri' => array
 		(
@@ -302,13 +318,15 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "text NOT NULL"
 		),
 		'uri_date' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature']['uri_date'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>32, 'rgxp' => 'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
+			'eval'                    => array('maxlength'=>32, 'rgxp' => 'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
 		'released' => array
 		(
@@ -318,7 +336,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'filter'                  => true,
 			'flag'                    => 11,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>false, 'maxlength'=>30, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>false, 'maxlength'=>30, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(30) NOT NULL default ''"
 		),
 		'title_act' => array
 		(
@@ -328,7 +347,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'title_act_info' => array
 		(
@@ -337,7 +357,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>150, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>150, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(100) NOT NULL default ''"
 		),
 		'title_journal' => array
 		(
@@ -347,7 +368,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'volume' => array
 		(
@@ -355,7 +377,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>5, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>5, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(5) NOT NULL default ''"
 		),
 		'issue' => array
 		(
@@ -363,7 +386,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>30, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>30, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(30) NOT NULL default ''"
 		),
 		'pages' => array
 		(
@@ -371,27 +395,31 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>false, 'maxlength'=>20, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>false, 'maxlength'=>20, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(20) NOT NULL default ''"
 		),
 		'tags' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature']['tags'],
 			'inputType'               => 'tag',
-			'eval'                    => array()
+			'eval'                    => array(),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'addImage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature']['addImage'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'singleSRC' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true)
+			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'alt' => array
 		(
@@ -399,7 +427,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'size' => array
 		(
@@ -408,7 +437,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'inputType'               => 'imageSize',
 			'options'                 => array('crop', 'proportional', 'box'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'imagemargin' => array
 		(
@@ -416,7 +446,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'exclude'                 => true,
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'imageUrl' => array
 		(
@@ -428,14 +459,16 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'wizard' => array
 			(
 				array('tl_literature', 'pagePicker')
-			)
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'fullsize' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12')
+			'eval'                    => array('tl_class'=>'w50 m12'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'caption' => array
 		(
@@ -443,7 +476,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'floating' => array
 		(
@@ -452,14 +486,16 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'inputType'               => 'radioTable',
 			'options'                 => array('above', 'left', 'right', 'below'),
 			'eval'                    => array('cols'=>4, 'tl_class'=>'w50'),
-			'reference'               => &$GLOBALS['TL_LANG']['MSC']
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'addDownloads' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature']['addDownloads'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'downtitle' => array
 		(
@@ -467,14 +503,16 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'multiSRC' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['multiSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'mandatory'=>true)
+			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'mandatory'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'sortBy' => array
 		(
@@ -483,14 +521,16 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'inputType'               => 'select',
 			'options'                 => array('name_asc', 'name_desc', 'date_asc', 'date_desc', 'meta', 'random'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'abstract' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature']['abstract'],
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('allowHtml'=>false, 'cols' => 40, 'tl_class'=>'long')
+			'eval'                    => array('allowHtml'=>false, 'cols' => 40, 'tl_class'=>'long'),
+			'sql'                     => "blob NULL"
 		),
 		'literaturefile' => array
 		(

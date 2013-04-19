@@ -1,28 +1,10 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
- *
- * PHP version 5
- * @copyright  Helmut Schottmüller 2008 
- * @author     Helmut Schottmüller <typolight@aurealis.de>
- * @package    literature
- * @license    LGPL
+ * @copyright  Helmut Schottmüller 2009-2013
+ * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
+ * @package    literature 
+ * @license    LGPL 
  * @filesource
  */
 
@@ -30,20 +12,15 @@
  * Class tl_module_literaturelist
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Helmut Schottmüller 2008 
- * @author     Helmut Schottmüller <typolight@aurealis.de>
+ * @copyright  Helmut Schottmüller 2009-2013
+ * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
  * @package    Controller
  */
 class tl_module_literaturelist extends Backend
 {
 	public function getLitrefTemplates(DataContainer $dc)
 	{
-		if (version_compare(VERSION.BUILD, '2.9.0', '>=')) 
-		{
-			return $this->getTemplateGroup('litref_', $dc->activeRecord->pid);
-		} else {
-			return $this->getTemplateGroup('litref_');
-		}
+		return $this->getTemplateGroup('litref_', $dc->activeRecord->pid);
 	}  
 }
 
@@ -63,18 +40,20 @@ array_push($GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'], 'lit_sho
  */
 $GLOBALS['TL_DCA']['tl_module']['fields']['lit_categories'] = array
 (
-	'label'         => &$GLOBALS['TL_LANG']['tl_module']['lit_categories'],
-	'inputType'     => 'checkbox',
-	'foreignKey'    => 'tl_literature_category.title',
-	'eval'          => array('multiple'=>true)
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['lit_categories'],
+	'inputType'               => 'checkbox',
+	'foreignKey'              => 'tl_literature_category.title',
+	'eval'                    => array('multiple'=>true),
+	'sql'                     => "blob NULL"
 );
 
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['lit_listtitle'] = array
 (
-	'label'         => &$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'],
-	'inputType'     => 'text',
-	'eval'          => array('mandatory'=>true, 'maxlength' => 100)
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'],
+	'inputType'               => 'text',
+	'eval'                    => array('mandatory'=>true, 'maxlength' => 100),
+	'sql'                     => "varchar(100) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['lit_showsort'] = array
@@ -82,7 +61,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['lit_showsort'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['lit_showsort'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('submitOnChange'=>true)
+	'eval'                    => array('submitOnChange'=>true),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['lit_template'] = array
@@ -91,7 +71,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['lit_template'] = array
 	'default'                 => 'litref_standard',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-  'options_callback'        => array('tl_module_literaturelist', 'getLitrefTemplates')
+  'options_callback'        => array('tl_module_literaturelist', 'getLitrefTemplates'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['lit_sort'] = array
@@ -102,7 +83,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['lit_sort'] = array
 	'inputType'               => 'select',
 	'options'                 => array('released', 'title', 'author'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module']['lit_sort'],
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(30) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['lit_sortorder'] = array
@@ -113,14 +95,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['lit_sortorder'] = array
 	'inputType'               => 'select',
 	'options'                 => array('asc', 'desc'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module']['lit_sortorder'],
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(4) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['lit_tags'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['lit_tags'],
 	'inputType'               => 'tag',
-	'eval'                    => array('table' => 'tl_literature', 'isTag' => FALSE, 'tl_class'=>'clr long')
+	'eval'                    => array('table' => 'tl_literature', 'isTag' => FALSE, 'tl_class'=>'clr long'),
+	'sql'                     => "blob NULL"
 )
 
 ?>
