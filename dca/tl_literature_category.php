@@ -127,6 +127,7 @@ $GLOBALS['TL_DCA']['tl_literature_category'] = array
 		'description' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature_category']['description'],
+			'default'                 => '',
 			'search'                  => true,
 			'inputType'               => 'textarea',
 			'eval'                    => array('allowHtml'=>true, 'style'=>'height:80px;'),

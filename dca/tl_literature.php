@@ -315,6 +315,7 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 		'uri' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature']['uri'],
+			'default'                 => '',
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
