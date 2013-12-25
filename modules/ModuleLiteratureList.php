@@ -17,7 +17,7 @@ namespace Contao;
  * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
  * @package    Controller
  */
-class ModuleLiteratureList extends Module
+class ModuleLiteratureList extends \Module
 {
 	/**
 	 * Template

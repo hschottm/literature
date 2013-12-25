@@ -17,7 +17,7 @@ namespace Contao;
  * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
  * @package    Fontend
  */
-class ModuleLiteratureSearch extends Module
+class ModuleLiteratureSearch extends \Module
 {
 	/**
 	 * Template
