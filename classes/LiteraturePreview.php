@@ -173,77 +173,41 @@ class LiteraturePreview extends Frontend
 		$auxDate = array();
 
 		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
-
-		// Get all files
-		foreach ($this->arrData['multiSRC'] as $file)
+		if (!is_array($this->arrData['multiSRC']) || empty($this->arrData['multiSRC']))
 		{
-			if (isset($files[$file]) || !file_exists(TL_ROOT . '/' . $file))
+
+			return '';
+		}
+
+		$objFiles = \FilesModel::findMultipleByUuids($this->arrData['multiSRC']);
+		while ($objFiles->next())
+		{
+			if (isset($files[$file]) || !file_exists(TL_ROOT . '/' . $objFiles->path))
 			{
 				continue;
 			}
 
-			// Single files
-			if (is_file(TL_ROOT . '/' . $file))
+			if (is_file(TL_ROOT . '/' . $objFiles->path))
 			{
-				$objFile = new \File($file);
-
-				if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($file)))
+				$objFile = new \File($objFiles->path);
+				if (in_array($objFile->extension, $allowedDownload))
 				{
-					$this->parseMetaFile(dirname($file), true);
-					$arrMeta = $this->arrMeta[$objFile->basename];
-
-					if ($arrMeta[0] == '')
+					$arrMeta = deserialize($objFiles->meta, true);
+					$strHref = \Environment::get('request');
+					if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
 					{
-						$arrMeta[0] = specialchars($objFile->basename);
+						$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
 					}
+					$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFile->value);
 
-					$files[$file] = array
+					$files[$objFiles->name] = array
 					(
-						'link' => $arrMeta[0],
-						'title' => $arrMeta[0],
-						'href' => \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'file=' . $this->urlEncode($file),
-						'caption' => $arrMeta[2],
+						'link' => (strlen($arrMeta[$GLOBALS['TL_LANGUAGE']]['link']) > 0) ? $arrMeta[$GLOBALS['TL_LANGUAGE']]['link'] : $objFiles->name,
+						'title' => $arrMeta[$GLOBALS['TL_LANGUAGE']]['title'],
+						'href' => $strHref,
+						'caption' => $arrMeta[$GLOBALS['TL_LANGUAGE']]['caption'],
 						'filesize' => $this->getReadableSize($objFile->filesize, 1),
-						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
-						'meta' => $arrMeta
-					);
-
-					$auxDate[] = $objFile->mtime;
-				}
-
-				continue;
-			}
-
-			$subfiles = scan(TL_ROOT . '/' . $file);
-			$this->parseMetaFile($file);
-
-			// Folders
-			foreach ($subfiles as $subfile)
-			{
-				if (is_dir(TL_ROOT . '/' . $file . '/' . $subfile))
-				{
-					continue;
-				}
-
-				$objFile = new \File($file . '/' . $subfile);
-
-				if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($subfile)))
-				{
-					$arrMeta = $this->arrMeta[$objFile->basename];
-
-					if ($arrMeta[0] == '')
-					{
-						$arrMeta[0] = specialchars($objFile->basename);
-					}
-
-					$files[$file . '/' . $subfile] = array
-					(
-						'link' => $arrMeta[0],
-						'title' => $arrMeta[0],
-						'href' => \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'file=' . $this->urlEncode($file . '/' . $subfile),
-						'caption' => $arrMeta[2],
-						'filesize' => $this->getReadableSize($objFile->filesize, 1),
-						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
+						'icon' => 'assets/contao/images/' . $objFile->icon,
 						'meta' => $arrMeta
 					);
 

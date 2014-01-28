@@ -512,8 +512,8 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['multiSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'mandatory'=>true),
-			'sql'                     => "blob NULL"
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'files'=>true, 'mandatory'=>true),
+			'sql'                     => "blob NULL",
 		),
 		'sortBy' => array
 		(
