@@ -29,6 +29,17 @@ class LiteratureTools extends Backend
 			$this->redirect(str_replace('&key=import', '', \Environment::get('request')));
 		}
 
+		$this->import('BackendUser', 'User');
+		$class = $this->User->uploader;
+
+		// See #4086
+		if (!class_exists($class))
+		{
+			$class = 'FileUpload';
+		}
+
+		$objUploader = new $class();
+
 		$this->Template = new \BackendTemplate('be_import_literature');
 
 		$this->Template->literaturefile = $this->getFileTreeWidget(\Input::post('literaturefile'));
@@ -36,19 +47,64 @@ class LiteratureTools extends Backend
 		$this->Template->goBack = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->headline = $GLOBALS['TL_LANG']['tl_literature']['import'][1];
 		$this->Template->request = ampersand(\Environment::get('request'), ENCODE_AMPERSANDS);
+		$this->Template->request_token = REQUEST_TOKEN;
+		$this->Template->max_file_size = $GLOBALS['TL_CONFIG']['maxFileSize'];
 		$this->Template->submit = specialchars($GLOBALS['TL_LANG']['MSC']['continue']);
+		$this->Template->message = \Message::generate();
+		$this->import('BackendUser', 'User');
+		$class = $this->User->uploader;
+
+		// See #4086
+		if (!class_exists($class))
+		{
+			$class = 'FileUpload';
+		}
+
+		$objUploader = new $class();
+		$this->Template->markup = $objUploader->generateMarkup();
+
 		if (\Input::post('FORM_SUBMIT') == 'tl_import_literature')
 		{
-			$f = \FilesModel::findOneById($this->Template->literaturefile->value);
-			if ($f)
+			$arrUploaded = $objUploader->uploadTo('system/tmp');
+			if (empty($arrUploaded))
 			{
-				switch ($f->extension)
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['all_fields']);
+				$this->reload();
+			}
+
+			$arrFiles = array();
+
+			foreach ($arrUploaded as $strFile)
+			{
+				// Skip folders
+				if (is_dir(TL_ROOT . '/' . $strFile))
 				{
-					case 'bib':
-						$this->importBibTeX(new \File($f->path));
-						break;
-					default:
-						break;
+					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($strFile)));
+					continue;
+				}
+
+				$objFile = new \File($strFile, true);
+
+				// Skip anything but .cto files
+				if ($objFile->extension != 'bib')
+				{
+					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
+					continue;
+				}
+
+				$arrFiles[] = $strFile;
+			}
+			if (empty($arrFiles))
+			{
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['all_fields']);
+				$this->reload();
+			}
+			else
+			{
+				foreach ($arrFiles as $file)
+				{
+					$objFile = new \File($file, true);
+					$this->importBibTeX($objFile);
 				}
 				$this->redirect(str_replace('&key=import', '', \Environment::get('request')));
 			}
@@ -144,7 +200,7 @@ class LiteratureTools extends Backend
 								'',
 								$title_journal,
 								(array_key_exists('pages', $entry)) ? $entry['pages'] : '',
-								(array_key_exists('volume', $entry)) ? $entry['volume'] : '',
+								(array_key_exists('volume', $entry)) ? substr($entry['volume'],0,5) : '',
 								(array_key_exists('number', $entry)) ? $entry['number'] : '',
 								$location,
 								$publisher,
