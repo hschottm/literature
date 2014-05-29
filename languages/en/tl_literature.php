@@ -83,7 +83,7 @@ $GLOBALS['TL_LANG']['tl_literature']['addImage'] = array('Add an image', 'Add an
 $GLOBALS['TL_LANG']['tl_literature']['addDownloads'] = array('Add downloads', 'Add downloads to the literature entry.');
 $GLOBALS['TL_LANG']['tl_literature']['downtitle']   = array('Headline', 'Please enter a headline for the downloads.');
 
-$GLOBALS['TL_LANG']['tl_literature']['literaturefile'] = array('File source', 'Please choose the file containing literature entries you want to import from the files directory. Allowed file types are BibTeX (*.bib) files.');
+$GLOBALS['TL_LANG']['tl_literature']['literaturefile'] = array('File source', 'Please choose one or more files containing the literature entries you want to import from your device. Allowed file types are BibTeX (*.bib) files.');
 $GLOBALS['TL_LANG']['tl_literature']['import']   = array('Import', 'Import literature entries');
 
 /**
