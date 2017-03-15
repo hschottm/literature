@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @copyright  Helmut Schottmüller 2009-2013
+ * @copyright  Helmut Schottmüller 2009-2017
  * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
- * @package    literature 
- * @license    LGPL 
+ * @package    literature
+ * @license    LGPL
  * @filesource
  */
 
@@ -13,7 +13,7 @@ namespace Contao;
 /**
  * Class ModuleLiteratureList
  *
- * @copyright  Helmut Schottmüller 2009-2013
+ * @copyright  Helmut Schottmüller 2009-2017
  * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
  * @package    Controller
  */
@@ -71,7 +71,6 @@ class ModuleLiteratureList extends \Module
 	 */
 	protected function compile()
 	{
-		$this->import('String');
 		$this->loadDataContainer('tl_literature');
 		$this->loadLanguageFile('tl_literature');
 		$this->listLiterature();
@@ -110,26 +109,35 @@ class ModuleLiteratureList extends \Module
 
 		$tags = (strlen($this->lit_tags)) ? array_filter(trimsplit(",", $this->lit_tags), 'strlen') : array();
 		$relatedlist = (strlen(\Input::get('related'))) ? split(",", \Input::get('related')) : array();
-		$searchtags = array_merge(array(\Input::get('tag')), $relatedlist);
+    $searchtags = (strlen(\Input::get('tag'))) ? array(\Input::get('tag')) : array();
+		$searchtags = array_merge($searchtags, $relatedlist);
 		if (count($tags))
 		{
 			$alltags = array();
-			foreach ($searchtags as $tag) if (in_array($tag, $tags)) array_push($alltags, $tag);
+      if (count($searchtags))
+      {
+        foreach ($searchtags as $tag) {
+          if (in_array($tag, $tags)) array_push($alltags, $tag);
+        }
+      }
+      else {
+        $alltags = $tags;
+      }
 		} else $alltags = $searchtags;
 		$tagids = array();
 		foreach ($alltags as $tag)
 		{
 			if (count($tagids))
 			{
-				$tagids = $this->Database->prepare("SELECT id FROM tl_tag WHERE from_table = ? AND tag = ? AND id IN (" . join($tagids, ",") . ")")
+				$tagids = $this->Database->prepare("SELECT tid FROM tl_tag WHERE from_table = ? AND tag = ? AND id IN (" . join($tagids, ",") . ")")
 					->execute('tl_literature', $tag)
-					->fetchEach('id');
+					->fetchEach('tid');
 			}
 			else
 			{
-				$tagids = $this->Database->prepare("SELECT id FROM tl_tag WHERE from_table = ? AND tag = ?")
+				$tagids = $this->Database->prepare("SELECT tid FROM tl_tag WHERE from_table = ? AND tag = ?")
 					->execute('tl_literature', $tag)
-					->fetchEach('id');
+					->fetchEach('tid');
 			}
 		}
 		if (count($tagids) == 0)
@@ -143,9 +151,9 @@ class ModuleLiteratureList extends \Module
 			{
 				foreach ($tags as $tag)
 				{
-					$arrIds = $this->Database->prepare("SELECT id FROM tl_tag WHERE from_table = ? AND tag = ?")
+					$arrIds = $this->Database->prepare("SELECT tid FROM tl_tag WHERE from_table = ? AND tag = ?")
 						->execute('tl_literature', $tag)
-						->fetchEach('id');
+						->fetchEach('tid');
 					$tagids = array_merge($tagids, $arrIds);
 				}
 			}
@@ -155,7 +163,6 @@ class ModuleLiteratureList extends \Module
 		{
 			$strWhere = " AND id IN (" . join($tagids, ",") . ")";
 		}
-
 		$searchfilter = '';
 		$params = array();
 		if (strlen(\Input::get('search')) && strlen(\Input::get('for')))
@@ -209,5 +216,3 @@ class ModuleLiteratureList extends \Module
 		$this->Template->per_page = $per_page;
 	}
 }
-
-?>

@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @copyright  Helmut Schottmüller 2009-2013
+ * @copyright  Helmut Schottmüller 2009-2017
  * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
- * @package    literature 
- * @license    LGPL 
+ * @package    literature
+ * @license    LGPL
  * @filesource
  */
 
@@ -24,7 +24,7 @@ class LiteraturePersonalPage extends Frontend
 		parent::__construct();
 		$this->loadLanguageFile('tl_literature');
 	}
-	
+
 	protected function showLiteratureSelection()
 	{
 		$objTemplate = new \FrontendTemplate('litlist_available_literature');
@@ -48,7 +48,7 @@ class LiteraturePersonalPage extends Frontend
 		$objTemplate->literatureEntries = $literature_entries;
 		return $objTemplate->parse();
 	}
-	
+
 	public function editPersonalLiteratureList(&$pageArray, $caller)
 	{
 		$this->import('FrontendUser', 'User');
@@ -62,7 +62,7 @@ class LiteraturePersonalPage extends Frontend
 			$listname = key(\Input::post("removeList"));
 			unset($pageArray["content"]["lists"][$listname]);
 		}
-		
+
 		$references = array();
 		if (strlen(\Input::post("removeLiteraturePersonalPage")))
 		{
@@ -94,7 +94,7 @@ class LiteraturePersonalPage extends Frontend
 				}
 			}
 		}
-		
+
 		if (is_array($pageArray["content"]["lists"]))
 		{
 			foreach ($pageArray["content"]["lists"] as $listname => $listarray)
@@ -111,14 +111,14 @@ class LiteraturePersonalPage extends Frontend
 		{
 			$pageArray["content"] = array();
 		}
-		
+
 		if (strlen(\Input::post("add_list")))
 		{
 			$pageArray["content"]["lists"][\Input::post("listadd")] = array();
 		}
-		if (strlen(\Input::post("saveLiteraturePersonalPage")) || 
-			strlen(\Input::post("removeLiteraturePersonalPage")) || 
-			strlen(\Input::post("removeList")) || 
+		if (strlen(\Input::post("saveLiteraturePersonalPage")) ||
+			strlen(\Input::post("removeLiteraturePersonalPage")) ||
+			strlen(\Input::post("removeList")) ||
 			strlen(\Input::post("add_list"))
 		)
 		{
@@ -144,7 +144,7 @@ class LiteraturePersonalPage extends Frontend
 		$objTemplate->references = $references;
 		return $objTemplate->parse();
 	}
-	
+
 	public function showPersonalLiteratureList(&$pageArray)
 	{
 		$references = array();
@@ -156,7 +156,7 @@ class LiteraturePersonalPage extends Frontend
 				$preview->loadLiterature($id);
 				$references[$id] = $preview->getPreview();
 			}
-		}		
+		}
 		$objTemplate = new \FrontendTemplate('litlist_personal');
 		$objTemplate->lists = is_array($pageArray["content"]["lists"]) ? $pageArray["content"]["lists"] : array();
 		$objTemplate->references = $references;

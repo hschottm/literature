@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @copyright  Helmut Schottmüller 2009-2013
+ * @copyright  Helmut Schottmüller 2009-2017
  * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
- * @package    literature 
- * @license    LGPL 
+ * @package    literature
+ * @license    LGPL
  * @filesource
  */
 
@@ -94,5 +94,3 @@ class Literature
 		return false;
 	}
 }
-
-?>

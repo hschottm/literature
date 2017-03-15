@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @copyright  Helmut Schottmüller 2009-2013
+ * @copyright  Helmut Schottmüller 2009-2017
  * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
- * @package    literature 
- * @license    LGPL 
+ * @package    literature
+ * @license    LGPL
  * @filesource
  */
 
@@ -111,7 +111,7 @@ class LiteratureTools extends Backend
 		}
 		return $this->Template->parse();
 	}
-	
+
 	protected function importBibTeX(File $f)
 	{
 		$parse = new \PARSEENTRIES();
@@ -158,7 +158,7 @@ class LiteratureTools extends Backend
 					default:
 						break;
 				}
-				
+
 				$stmt = null;
 				$pub = preg_split('/,/', $entry['publisher']);
 				$publisher = (array_key_exists('publisher', $entry)) ? $entry['publisher'] : '';
@@ -188,7 +188,7 @@ class LiteratureTools extends Backend
 						$title_info = (array_key_exists('series', $entry)) ? $entry['series'] : '';
 						$stmt = $this->Database->prepare("INSERT INTO tl_literature (pid, literature_type, titlesort, title, title_periodic, title_nonperiodicpart, title_info, title_source, title_act, title_act_info, title_journal, pages, volume, issue, location, publisher, released, isbn, issn, uri, uri_date, authors, editors, abstract, tstamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 							->execute(
-								\Input::get('id'), 
+								\Input::get('id'),
 								$literature_type,
 								$titlesort,
 								'',
@@ -222,7 +222,7 @@ class LiteratureTools extends Backend
 						$title_info = (array_key_exists('series', $entry)) ? $entry['series'] : '';
 						$stmt = $this->Database->prepare("INSERT INTO tl_literature (pid, literature_type, titlesort, title, title_periodic, title_nonperiodicpart, title_info, title_source, title_act, title_act_info, title_journal, pages, volume, issue, location, publisher, released, isbn, issn, uri, uri_date, authors, editors, abstract, tstamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 							->execute(
-								\Input::get('id'), 
+								\Input::get('id'),
 								$literature_type,
 								$titlesort,
 								(array_key_exists('title', $entry)) ? $entry['title'] : '',
@@ -257,7 +257,7 @@ class LiteratureTools extends Backend
 						$title_info = (array_key_exists('series', $entry)) ? $entry['series'] : '';
 						$stmt = $this->Database->prepare("INSERT INTO tl_literature (pid, literature_type, titlesort, title, title_periodic, title_nonperiodicpart, title_info, title_source, title_act, title_act_info, title_journal, pages, volume, issue, location, publisher, released, isbn, issn, uri, uri_date, authors, editors, abstract, tstamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 							->execute(
-								\Input::get('id'), 
+								\Input::get('id'),
 								$literature_type,
 								$titlesort,
 								'',

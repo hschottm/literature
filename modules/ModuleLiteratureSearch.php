@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @copyright  Helmut Schottmüller 2009-2013
+ * @copyright  Helmut Schottmüller 2009-2017
  * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
- * @package    literature 
- * @license    LGPL 
+ * @package    literature
+ * @license    LGPL
  * @filesource
  */
 
@@ -13,7 +13,7 @@ namespace Contao;
 /**
  * Class ModuleLiteratureSearch
  *
- * @copyright  Helmut Schottmüller 2009-2013
+ * @copyright  Helmut Schottmüller 2009-2017
  * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
  * @package    Fontend
  */
@@ -54,7 +54,6 @@ class ModuleLiteratureSearch extends \Module
 	 */
 	protected function compile()
 	{
-		$this->import('String');
 		$this->loadDataContainer('tl_literature');
 		$this->loadLanguageFile('tl_literature');
 		$this->showSearchField();
@@ -108,5 +107,3 @@ class ModuleLiteratureSearch extends \Module
 		$this->Template->sort = \Input::get('sort');
 	}
 }
-
-?>

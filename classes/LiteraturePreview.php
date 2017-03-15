@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @copyright  Helmut Schottmüller 2009-2013
+ * @copyright  Helmut Schottmüller 2009-2017
  * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
- * @package    literature 
- * @license    LGPL 
+ * @package    literature
+ * @license    LGPL
  * @filesource
  */
 
@@ -33,16 +33,16 @@ class LiteraturePreview extends Frontend
 	* List of editors
 	*/
 	protected $arrEditors = array();
-	
+
 	/**
 	* Frontend template for the literature output
 	*/
 	protected $template;
 
-	function __construct($data = null, $template = "") 
+	function __construct($data = null, $template = "")
 	{
 		parent::__construct();
-		if (is_array($data)) 
+		if (is_array($data))
 		{
 			$this->arrData = $data;
 			$this->arrData['multiSRC'] = deserialize($this->arrData['multiSRC']);
@@ -51,7 +51,7 @@ class LiteraturePreview extends Frontend
 		}
 		$this->template = (strlen($template)) ? $template : $this->getDefaultTemplate();
 	}
-	
+
 	/**
 	 * Return the name of the default literature template
 	 * @return string
@@ -60,7 +60,7 @@ class LiteraturePreview extends Frontend
 	{
 		return "litref_standard";
 	}
-	
+
 	/**
 	 * Load a literature entry into the object
 	 * @param integer
@@ -76,7 +76,7 @@ class LiteraturePreview extends Frontend
 			$this->loadEditors($this->arrData['id']);
 		}
 	}
-	
+
 	/**
 	 * Load the literature authors into an array
 	 * @param integer
@@ -272,5 +272,3 @@ class LiteraturePreview extends Frontend
 		return false;
 	}
 }
-
-?>
