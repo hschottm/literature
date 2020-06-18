@@ -20,7 +20,7 @@ class tl_module_literaturelist extends Backend
 {
 	public function getLitrefTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('litref_', $dc->activeRecord->pid);
+		return $this->getTemplateGroup('litref_');
 	}  
 }
 

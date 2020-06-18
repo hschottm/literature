@@ -10,6 +10,10 @@
 
 namespace Hschottm\LiteratureBundle;
 
+use RenanBr\BibTexParser\Listener;
+use RenanBr\BibTexParser\Parser;
+use RenanBr\BibTexParser\Processor;
+
 class LiteratureTools extends \Backend
 {
 	protected $blnSave = true;
@@ -106,26 +110,31 @@ class LiteratureTools extends \Backend
 
 	protected function importBibTeX(File $f)
 	{
-		$parse = new \PARSEENTRIES();
-		$parse->expandMacro = true;
-		$parse->openBib(TL_ROOT . '/' . $f->value);
-		$parse->extractEntries();
-		$parse->closeBib();
-		list($preamble, $strings, $entries, $undefinedStrings) = $parse->returnArrays();
+		$listener = new Listener();
+		$listener->addProcessor(new Processor\TagNameCaseProcessor(CASE_LOWER));
+		$listener->addProcessor(new Processor\NamesProcessor());
+		// $listener->addProcessor(new Processor\KeywordsProcessor());
+		// $listener->addProcessor(new Processor\DateProcessor());
+		// $listener->addProcessor(new Processor\FillMissingProcessor([/* ... */]));
+		// $listener->addProcessor(new Processor\TrimProcessor());
+		// $listener->addProcessor(new Processor\UrlFromDoiProcessor());
+		$listener->addProcessor(new Processor\LatexToUnicodeProcessor());
+		
+		// Create a Parser and attach the listener
+		$parser = new Parser();
+		$parser->addListener($listener);
+		
+		// Parse the content, then read processed data from the Listener
+		$parser->parseFile(TL_ROOT . '/' . $f->value); // or parseFile('/path/to/file.bib')
+		$entries = $listener->export();
 		$literature_type = '';
 		if (is_array($entries))
 		{
 			foreach ($entries as $entry)
 			{
-				$authordata = $entry['author'];
-				$creator = new \PARSECREATORS();
-				$authors = $creator->parse($authordata);
-				$editors = array();
-				if (array_key_exists('editor', $entry))
-				{
-					$editors = $creator->parse($entry['editor']);
-				}
-				switch ($entry['bibtexEntryType'])
+				$authors = $entry['author'];
+				$editors = $entry['editor'];
+				switch ($entry['_type'])
 				{
 					case 'article':
 					case 'proceedings':

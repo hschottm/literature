@@ -8,6 +8,8 @@
  * @see	      https://github.com/hschottm/literature
  */
 
+use \Hschottm\LiteratureBundle\LiteraturePreview;
+
 /**
  * Load tl_content language file
  */
@@ -559,7 +561,7 @@ class tl_literature extends Backend
 	 */
 	public function compilePreview($row, $blnWriteToFile=false)
 	{
-		$preview = new LiteraturePreview($row);
+		$preview = new \Hschottm\LiteratureBundle\LiteraturePreview($row);
 		return $preview->getPreview();
 	}
 	
