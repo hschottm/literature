@@ -1,0 +1,50 @@
+{
+    "name":"hschottm/contao-literature",
+    "description":"contao-literature is a database for literature references. The literature references can be compiled into bibliographies.",
+    "keywords":["contao", "extension", "bundle", "literature", "bibliography", "endnote", "bibtex"],
+    "type":"contao-bundle",
+    "license":["LGPL-3.0-or-later", "CC-BY-NC-SA-4.0"],
+    "authors":[
+      {
+        "name":"Helmut Schottmüller",
+        "homepage":"https://github.com/hschottm"
+      }
+    ],
+    "require":{
+      "php": "^5.6 || ^7.0",
+      "contao/core-bundle":"~4.4"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0",
+        "doctrine/doctrine-cache-bundle": "^1.3",
+        "friendsofphp/php-cs-fixer": "^2.12",
+        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/message-factory": "^1.0.2",
+        "phpunit/phpunit": "^5.7.26",
+        "symfony/phpunit-bridge": "^3.2"
+    },
+    "conflict": {
+          "contao/core": "*",
+          "contao/manager-plugin": "<2.0 || >=3.0"
+      },
+    "autoload": {
+          "psr-4": {
+              "Hschottm\\LiteratureBundle\\": "src/"
+          },
+      "classmap": [
+            "src/Resources/contao/"
+            ],
+        "exclude-from-classmap": [
+        "src/Resources/contao/config/",
+        "src/Resources/contao/languages/"
+            ]
+      },
+      "extra":{
+        "contao-manager-plugin": "Hschottm\\LiteratureBundle\\ContaoManager\\Plugin"
+      },
+      "support": {
+        "issues": "https://github.com/hschottm/literature/issues",
+        "source": "https://github.com/hschottm/literature"
+    }
+  }
+  
