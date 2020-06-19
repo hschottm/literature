@@ -1,3 +1,6 @@
+[![Latest Version on Packagist](http://img.shields.io/packagist/v/hschottm/contao-literature.svg?style=flat)](https://packagist.org/packages/hschottm/contao-literature)
+[![Installations via composer per month](http://img.shields.io/packagist/dm/hschottm/contao-literature.svg?style=flat)](https://packagist.org/packages/hschottm/contao-literature)
+[![Installations via composer total](http://img.shields.io/packagist/dt/hschottm/contao-literature.svg?style=flat)](https://packagist.org/packages/hschottm/contao-literature)
 # contao-literature
 This extension allows the input of literature references in the backend and list output of literature references in the frontend.
 You can use the literature reference editor in the backend to enter and group your literature references. The editor distinguishes between the following types of references:
