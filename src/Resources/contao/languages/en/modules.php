@@ -3,7 +3,7 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['literature']    = array('Literature administration', 'This module allows you to create and administer literature references.');
+$GLOBALS['TL_LANG']['MOD']['literature']    = array('Literature references', 'This module allows you to create and administer literature references.');
 
 
 /**
