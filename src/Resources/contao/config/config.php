@@ -1,11 +1,11 @@
 <?php
 
 use Hschottm\LiteratureBundle\Literature;
-use Hschottm\LiteratureBundle\LiteraturePersonalPage;
 use Hschottm\LiteratureBundle\LiteraturePreview;
 use Hschottm\LiteratureBundle\LiteratureTools;
 use Hschottm\LiteratureBundle\ModuleLiteratureList;
 use Hschottm\LiteratureBundle\ModuleLiteratureSearch;
+use Hschottm\LiteratureBundle\EventListener\InsertTagsListener;
 
 array_insert($GLOBALS['BE_MOD']['content'], 3, array
 (
@@ -31,8 +31,6 @@ array_insert($GLOBALS['FE_MOD']['miscellaneous'], 3, array
 /**
  * Register page content handlers
  */
-$GLOBALS['TL_PERSONALDATA_EDITOR']['literature'] = array(LiteraturePersonalPage::class, 'editPersonalLiteratureList');
-$GLOBALS['TL_PERSONALDATA']['literature'] = array(LiteraturePersonalPage::class, 'showPersonalLiteratureList');
 $GLOBALS['TL_HOOKS']['addCustomRegexp'][] = array(Literature::class, 'checkISBN');
 
 $GLOBALS['tags_extension']['sourcetable'][] = 'tl_literature';

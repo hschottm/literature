@@ -11,6 +11,7 @@
 namespace Hschottm\LiteratureBundle\EventListener;
 
 use Contao\CoreBundle\Framework\ContaoFrameworkInterface;
+use Hschottm\LiteratureBundle\LiteraturePreview;
 
 class InsertTagsListener
 {
@@ -55,7 +56,7 @@ class InsertTagsListener
 
         if (strcmp($key, "insert_literature") == 0)
         {
-            $preview = new \LiteraturePreview();
+            $preview = new LiteraturePreview();
             $preview->loadLiterature($elements[1]);
             return $preview->getPreview();
         }

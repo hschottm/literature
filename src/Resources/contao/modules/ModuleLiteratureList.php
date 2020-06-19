@@ -10,6 +10,8 @@
 
 namespace Hschottm\LiteratureBundle;
 
+use Hschottm\LiteratureBundle\LiteraturePreview;
+
 class ModuleLiteratureList extends \Module
 {
 	/**
@@ -196,7 +198,7 @@ class ModuleLiteratureList extends \Module
 					$litdata['urishort'] = $matches[1];
 				}
 			}
-			$preview = new \LiteraturePreview($litdata, $lit_template);
+			$preview = new LiteraturePreview($litdata, $lit_template);
 			$arrData[$class] = array(
 				'raw' => $litdata,
 				'content' => $preview->getPreview(),
