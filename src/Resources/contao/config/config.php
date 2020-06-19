@@ -29,11 +29,6 @@ array_insert($GLOBALS['FE_MOD']['miscellaneous'], 3, array
 ));
 
 /**
- * Hooks
- */
-$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array(LiteraturePreview::class, 'replaceLiteratureInsertTags');
-
-/**
  * Register page content handlers
  */
 $GLOBALS['TL_PERSONALDATA_EDITOR']['literature'] = array(LiteraturePersonalPage::class, 'editPersonalLiteratureList');
@@ -41,3 +36,8 @@ $GLOBALS['TL_PERSONALDATA']['literature'] = array(LiteraturePersonalPage::class,
 $GLOBALS['TL_HOOKS']['addCustomRegexp'][] = array(Literature::class, 'checkISBN');
 
 $GLOBALS['tags_extension']['sourcetable'][] = 'tl_literature';
+
+/**
+ * Hooks
+ */
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('contao_literature.listener.insert_tags', 'onReplaceInsertTags');

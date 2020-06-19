@@ -100,61 +100,64 @@ class ModuleLiteratureList extends \Module
 
 		$this->Template->listtitle = $this->lit_listtitle;
 
-		$tags = (strlen($this->lit_tags)) ? array_filter(trimsplit(",", $this->lit_tags), 'strlen') : array();
-		$relatedlist = (strlen(\Input::get('related'))) ? split(",", \Input::get('related')) : array();
-    $searchtags = (strlen(\Input::get('tag'))) ? array(\Input::get('tag')) : array();
-		$searchtags = array_merge($searchtags, $relatedlist);
-		if (count($tags))
+		$strWhere = "";
+		if (class_exists(\TagList::class))
 		{
-			$alltags = array();
-      if (count($searchtags))
-      {
-        foreach ($searchtags as $tag) {
-          if (in_array($tag, $tags)) array_push($alltags, $tag);
-        }
-      }
-      else {
-        $alltags = $tags;
-      }
-		} else $alltags = $searchtags;
-		$tagids = array();
-		foreach ($alltags as $tag)
-		{
-			if (count($tagids))
-			{
-				$tagids = $this->Database->prepare("SELECT tid FROM tl_tag WHERE from_table = ? AND tag = ? AND id IN (" . join($tagids, ",") . ")")
-					->execute('tl_literature', $tag)
-					->fetchEach('tid');
-			}
-			else
-			{
-				$tagids = $this->Database->prepare("SELECT tid FROM tl_tag WHERE from_table = ? AND tag = ?")
-					->execute('tl_literature', $tag)
-					->fetchEach('tid');
-			}
-		}
-		if (count($tagids) == 0)
-		{
-			if (strlen(\Input::get('tag')))
-			{
-				$this->Template->tbody = array();
-				return;
-			}
+			$tags = (strlen($this->lit_tags)) ? array_filter(trimsplit(",", $this->lit_tags), 'strlen') : array();
+			$relatedlist = (strlen(\Input::get('related'))) ? split(",", \Input::get('related')) : array();
+			$searchtags = (strlen(\Input::get('tag'))) ? array(\Input::get('tag')) : array();
+			$searchtags = array_merge($searchtags, $relatedlist);
 			if (count($tags))
 			{
-				foreach ($tags as $tag)
+				$alltags = array();
+				if (count($searchtags))
 				{
-					$arrIds = $this->Database->prepare("SELECT tid FROM tl_tag WHERE from_table = ? AND tag = ?")
+					foreach ($searchtags as $tag) {
+					if (in_array($tag, $tags)) array_push($alltags, $tag);
+					}
+				}
+				else {
+					$alltags = $tags;
+				}
+			} else $alltags = $searchtags;
+			$tagids = array();
+			foreach ($alltags as $tag)
+			{
+				if (count($tagids))
+				{
+					$tagids = $this->Database->prepare("SELECT tid FROM tl_tag WHERE from_table = ? AND tag = ? AND id IN (" . join($tagids, ",") . ")")
 						->execute('tl_literature', $tag)
 						->fetchEach('tid');
-					$tagids = array_merge($tagids, $arrIds);
+				}
+				else
+				{
+					$tagids = $this->Database->prepare("SELECT tid FROM tl_tag WHERE from_table = ? AND tag = ?")
+						->execute('tl_literature', $tag)
+						->fetchEach('tid');
 				}
 			}
-		}
-		$strWhere = "";
-		if (count($tagids))
-		{
-			$strWhere = " AND id IN (" . join($tagids, ",") . ")";
+			if (count($tagids) == 0)
+			{
+				if (strlen(\Input::get('tag')))
+				{
+					$this->Template->tbody = array();
+					return;
+				}
+				if (count($tags))
+				{
+					foreach ($tags as $tag)
+					{
+						$arrIds = $this->Database->prepare("SELECT tid FROM tl_tag WHERE from_table = ? AND tag = ?")
+							->execute('tl_literature', $tag)
+							->fetchEach('tid');
+						$tagids = array_merge($tagids, $arrIds);
+					}
+				}
+			}
+			if (count($tagids))
+			{
+				$strWhere = " AND id IN (" . join($tagids, ",") . ")";
+			}
 		}
 		$searchfilter = '';
 		$params = array();

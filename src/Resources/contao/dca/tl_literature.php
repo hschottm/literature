@@ -106,16 +106,6 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 		)
 	),
 
-	// Palettes
-	'palettes' => array
-	(
-		'__selector__'            => array('literature_type', 'addImage', 'addDownloads'),
-		'default'                 => '{type_legend},literature_type',
-		'nonperiodic'             => '{type_legend},literature_type;{authors_legend},authors;{nonperiodic_legend},released,title,title_info,title_source,location,publisher;{tags_legend},tags;{isbn_legend},isbn,issn;{uri_legend},uri,uri_date;{image_legend},addImage;{downloads_legend},addDownloads;{abstract_legend},abstract',
-		'periodic'                => '{type_legend},literature_type;{authors_legend},authors;{periodic_legend},released,title_periodic,title_info,title_journal,volume,issue,pages;{tags_legend},tags;{isbn_legend},isbn,issn;{uri_legend},uri,uri_date;{image_legend},addImage;{downloads_legend},addDownloads;{abstract_legend},abstract',
-		'nonperiodicpart'         => '{type_legend},literature_type;{authors_legend},authors;{nonperiodicpart_legend},released,title_nonperiodicpart,title_info;{editors_legend},editors;{book_legend},title_act,title_act_info,title_source,pages,location,publisher;{tags_legend},tags;{isbn_legend},isbn,issn;{uri_legend},uri,uri_date;{image_legend},addImage;{downloads_legend},addDownloads;{abstract_legend},abstract',
-	),
-	
 	'subpalettes' => array
 	(
 		'tagpalette'                    => 'tags',
@@ -542,6 +532,29 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 		)
 	)
 );
+
+if (!class_exists(\TagList::class))
+{
+	// Palettes
+	$GLOBALS['TL_DCA']['tl_literature']['palettes'] = array
+	(
+		'__selector__'            => array('literature_type', 'addImage', 'addDownloads'),
+		'default'                 => '{type_legend},literature_type',
+		'nonperiodic'             => '{type_legend},literature_type;{authors_legend},authors;{nonperiodic_legend},released,title,title_info,title_source,location,publisher;{isbn_legend},isbn,issn;{uri_legend},uri,uri_date;{image_legend},addImage;{downloads_legend},addDownloads;{abstract_legend},abstract',
+		'periodic'                => '{type_legend},literature_type;{authors_legend},authors;{periodic_legend},released,title_periodic,title_info,title_journal,volume,issue,pages;{tags_legend},tags;{isbn_legend},isbn,issn;{uri_legend},uri,uri_date;{image_legend},addImage;{downloads_legend},addDownloads;{abstract_legend},abstract',
+		'nonperiodicpart'         => '{type_legend},literature_type;{authors_legend},authors;{nonperiodicpart_legend},released,title_nonperiodicpart,title_info;{editors_legend},editors;{book_legend},title_act,title_act_info,title_source,pages,location,publisher;{tags_legend},tags;{isbn_legend},isbn,issn;{uri_legend},uri,uri_date;{image_legend},addImage;{downloads_legend},addDownloads;{abstract_legend},abstract',
+	);
+} else {
+	// Palettes
+	$GLOBALS['TL_DCA']['tl_literature']['palettes'] = array
+	(
+		'__selector__'            => array('literature_type', 'addImage', 'addDownloads'),
+		'default'                 => '{type_legend},literature_type',
+		'nonperiodic'             => '{type_legend},literature_type;{authors_legend},authors;{nonperiodic_legend},released,title,title_info,title_source,location,publisher;{tags_legend},tags;{isbn_legend},isbn,issn;{uri_legend},uri,uri_date;{image_legend},addImage;{downloads_legend},addDownloads;{abstract_legend},abstract',
+		'periodic'                => '{type_legend},literature_type;{authors_legend},authors;{periodic_legend},released,title_periodic,title_info,title_journal,volume,issue,pages;{tags_legend},tags;{isbn_legend},isbn,issn;{uri_legend},uri,uri_date;{image_legend},addImage;{downloads_legend},addDownloads;{abstract_legend},abstract',
+		'nonperiodicpart'         => '{type_legend},literature_type;{authors_legend},authors;{nonperiodicpart_legend},released,title_nonperiodicpart,title_info;{editors_legend},editors;{book_legend},title_act,title_act_info,title_source,pages,location,publisher;{tags_legend},tags;{isbn_legend},isbn,issn;{uri_legend},uri,uri_date;{image_legend},addImage;{downloads_legend},addDownloads;{abstract_legend},abstract',
+	);
+}
 
 /**
  * Class tl_literature

@@ -244,24 +244,4 @@ class LiteraturePreview extends \Frontend
 
 		return array_values($files);
 	}
-
-	/**
-	 * Replace literature specific insert tags
-	 * @param string
-	 * @return string
-	 */
-	public function replaceLiteratureInsertTags($strTag)
-	{
-		if (preg_match("/insert_literature::(\\d+)/", $strTag, $matches))
-		{
-			$objLiterature = $this->Database->prepare("SELECT * FROM tl_literature WHERE id = ?")
-				->execute($matches[1]);
-			if ($objLiterature->numRows == 1)
-			{
-				$this->arrData = $objLiterature->row();
-				return $this->getPreview();
-			}
-		}
-		return false;
-	}
 }
