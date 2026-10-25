@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Back end modules

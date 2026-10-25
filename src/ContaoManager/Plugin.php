@@ -28,11 +28,11 @@ class Plugin implements BundlePluginInterface
     /**
      * {@inheritdoc}
      */
-    public function getBundles(ParserInterface $parser)
+    public function getBundles(ParserInterface $parser): array
     {
         return [
              BundleConfig::create(HschottmLiteratureBundle::class)
-              ->setLoadAfter([ContaoCoreBundle::class])
+              ->setLoadAfter([ContaoCoreBundle::class, \Hschottm\MultiTextWizardBundle\HschottmMultiTextWizardBundle::class])
               ->setReplace(['literature']),
          ];
     }

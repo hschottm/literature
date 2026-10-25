@@ -1,0 +1,13 @@
+{% macro names(people) %}{% for person in people %}{{ person[1]|trim }}{% if person[0]|trim %}, {{ person[0]|trim }}{% endif %}{% if not loop.last %}{{ loop.revindex == 2 ? ' & ' : ', ' }}{% endif %}{% endfor %}{% endmacro %}
+{{ _self.names(authors) }}{% if released|default('') %} ({{ released }}){% endif %}{% if authors or released|default('') %}. {% endif %}
+{% if literature_type == 'periodic' %}
+{{ title_periodic }}{% if title_info %} ({{ title_info }}){% endif %}. <u>{{ title_journal }}{% if volume or issue %}, {{ volume }}{% if issue %} ({{ issue }}){% endif %}{% endif %}</u>{% if pages %}, {{ pages }}{% endif %}.
+{% elseif literature_type == 'nonperiodic' %}
+<u>{{ title }}</u>{% if title_info %} ({{ title_info }}){% endif %}{% if title_source %} [{{ title_source }}]{% endif %}. {% if location %}{{ location }}{% if publisher %}: {% endif %}{% endif %}{{ publisher }}{% if location or publisher %}.{% endif %}
+{% elseif literature_type == 'nonperiodicpart' %}
+{{ title_nonperiodicpart }}{% if title_info %} ({{ title_info }}){% endif %}. {{ strIn }} {% if editors %}{{ _self.names(editors) }} ({{ editors|length == 1 ? strEditorShort : strEditorsShort }}), {% endif %}<u>{{ title_act }}</u>{% if title_act_info %} ({{ title_act_info }}){% endif %}{% if title_source %} [{{ title_source }}]{% endif %}{% if pages %} ({{ strPageShort }} {{ pages }}){% endif %}. {% if location %}{{ location }}{% if publisher %}: {% endif %}{% endif %}{{ publisher }}{% if location or publisher %}.{% endif %}
+{% else %}{{ title }}{% endif %}
+{% if uri %} {{ strAvailableAt }}: <a href="{{ uri }}">{{ urishort }}{% if urishort != uri %}<span class="shortened">[...]</span>{% endif %}</a>{% if uri_date %} [{{ uri_date|date(strDateFormat) }}]{% endif %}{% endif %}
+{% if isbn %} ISBN: {{ isbn }}{% endif %}
+{% if figure %}{% include '@Contao/component/_figure.html.twig' with {figure: figure, figure_attributes: attrs().set('class', figureClass).set('style', figureStyle)} only %}{% endif %}
+{% if downloads %}{% if downtitle %}<p class="downloadtitle">{{ downtitle }}</p>{% endif %}{{ downloads|raw }}{% endif %}

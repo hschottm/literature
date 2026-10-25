@@ -1,6 +1,4 @@
 services:
-    contao_literature.listener.insert_tags:
-        class: Hschottm\LiteratureBundle\EventListener\InsertTagsListener
-        arguments:
-            - "@contao.framework"
-        public: true
+    Hschottm\LiteratureBundle\EventListener\InsertTagsListener:
+        autowire: true
+        autoconfigure: true

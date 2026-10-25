@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $GLOBALS['TL_LANG']['tl_module']['lit_template']      = array('Reference style', 'Please choose a layout for the literature output. You can add custom <em>litref_</em> layouts to folder <em>templates</em>.');
 $GLOBALS['TL_LANG']['tl_module']['lit_categories'] = array('Categories', 'Please select one ore more categories to build the literature list.');

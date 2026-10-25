@@ -1,5 +1,5 @@
 <?php
- 
+
 $GLOBALS['TL_LANG']['tl_literature_category']['title']['0'] = "Titel";
 $GLOBALS['TL_LANG']['tl_literature_category']['title']['1'] = "Bitte geben Sie den Titel der Kategorie ein.";
 $GLOBALS['TL_LANG']['tl_literature_category']['description']['0'] = "Beschreibung";
@@ -16,4 +16,3 @@ $GLOBALS['TL_LANG']['tl_literature_category']['copy']['0'] = "Kategorie duplizie
 $GLOBALS['TL_LANG']['tl_literature_category']['copy']['1'] = "Kategorie ID %s duplizieren";
 $GLOBALS['TL_LANG']['tl_literature_category']['delete']['0'] = "Kategorie löschen";
 $GLOBALS['TL_LANG']['tl_literature_category']['delete']['1'] = "Kategorie ID %s löschen";
- 

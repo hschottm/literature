@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $GLOBALS['TL_LANG']['tl_literature']['literature_type']   = array('Literature type', 'Please select the literature type.');
 $GLOBALS['TL_LANG']['tl_literature']['literature_type']['periodic']     = array('Periodical journals etc.','Author, A. A., Author, B. B. & Author, C. C. (1994). Article title. <u>Journal, xx</u>, xxx-xxx.');
@@ -77,3 +77,12 @@ $GLOBALS['TL_LANG']['tl_literature']['image_legend']     = 'Image settings';
 $GLOBALS['TL_LANG']['tl_literature']['downloads_legend'] = 'Download settings';
 $GLOBALS['TL_LANG']['tl_literature']['abstract_legend'] = 'Abstract';
 
+
+$GLOBALS['TL_LANG']['tl_literature']['invalidBibtex'] = 'The BibTeX file could not be imported. Please check its format and the target category.';
+
+$GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_new'] = 'Author: New';
+$GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_copy'] = 'Author: Copy';
+$GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_delete'] = 'Author: Delete';
+$GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_new'] = 'Editor: New';
+$GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_copy'] = 'Editor: Copy';
+$GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_delete'] = 'Editor: Delete';

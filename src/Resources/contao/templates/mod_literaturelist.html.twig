@@ -1,0 +1,6 @@
+{% extends '@Contao/block_unsearchable.html.twig' %}
+{% block content %}
+{% if tbody %}<table class="all_records"><thead><tr><th>{{ listtitle }}</th></tr></thead><tbody>
+{% for class, row in tbody %}<tr class="{{ class }}"><td class="body {{ row.class }}">{{ row.content|raw }}</td></tr>{% endfor %}
+</tbody></table>{{ pagination|raw }}{% endif %}
+{% endblock %}

@@ -7,7 +7,7 @@ use Hschottm\LiteratureBundle\ModuleLiteratureList;
 use Hschottm\LiteratureBundle\ModuleLiteratureSearch;
 use Hschottm\LiteratureBundle\EventListener\InsertTagsListener;
 
-array_insert($GLOBALS['BE_MOD']['content'], 3, array
+\Contao\ArrayUtil::arrayInsert($GLOBALS['BE_MOD']['content'], 3, array
 (
 	'literature' => array(
 		"tables" => array(
@@ -22,7 +22,7 @@ array_insert($GLOBALS['BE_MOD']['content'], 3, array
 /**
  * Front end modules
  */
-array_insert($GLOBALS['FE_MOD']['miscellaneous'], 3, array
+\Contao\ArrayUtil::arrayInsert($GLOBALS['FE_MOD']['miscellaneous'], 3, array
 (
 	'literaturelist'    => ModuleLiteratureList::class,
 	'literaturesearch'  => ModuleLiteratureSearch::class
@@ -34,8 +34,3 @@ array_insert($GLOBALS['FE_MOD']['miscellaneous'], 3, array
 $GLOBALS['TL_HOOKS']['addCustomRegexp'][] = array(Literature::class, 'checkISBN');
 
 $GLOBALS['tags_extension']['sourcetable'][] = 'tl_literature';
-
-/**
- * Hooks
- */
-$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('contao_literature.listener.insert_tags', 'onReplaceInsertTags');

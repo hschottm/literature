@@ -19,13 +19,13 @@ class Literature
 	 * @param object
 	 * @return boolean
 	 */
-	public function checkISBN($strRegexp, $varValue, Widget $objWidget)
+	public function checkISBN($strRegexp, $varValue, \Contao\Widget $objWidget)
 	{
 		if ($strRegexp == 'isbn')
 		{
 			// remove non numbers
-			$isbn = preg_replace("/[^0-9X]/", "", $varValue);
-			if (preg_match("/^([0-9]{9}X)|([0-9]{10})|([0-9]{13})$/", $isbn, $matches))
+			$isbn = preg_replace("/[\s-]/", "", strtoupper((string) $varValue));
+			if (preg_match("/^(?:[0-9]{9}[0-9X]|[0-9]{13})$/", $isbn, $matches))
 			{
 				if (strlen($isbn) == 10)
 				{

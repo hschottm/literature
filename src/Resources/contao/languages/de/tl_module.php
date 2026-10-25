@@ -1,5 +1,5 @@
 <?php
- 
+
 $GLOBALS['TL_LANG']['tl_module']['lit_template']['0'] = "Ausgabestil";
 $GLOBALS['TL_LANG']['tl_module']['lit_template']['1'] = "Bitte wählen Sie ein Layout für die Ausgabe eines Literaturverweises. Sie können eigene <em>litref_</em>-Vorlagen im Ordner <em>templates</em> speichern.";
 $GLOBALS['TL_LANG']['tl_module']['lit_categories']['0'] = "Kategorien";
@@ -27,4 +27,3 @@ $GLOBALS['TL_LANG']['tl_module']['lit_tags']['1'] = "Bitte geben Sie eine oder m
 $GLOBALS['TL_LANG']['tl_module']['pagetype']['literature'] = "Literaturliste";
 $GLOBALS['TL_LANG']['tl_module']['litsort_legend'] = 'Sortierung';
 $GLOBALS['TL_LANG']['tl_module']['literature_legend'] = 'Literaturliste';
-

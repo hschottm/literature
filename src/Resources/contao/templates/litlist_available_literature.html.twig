@@ -1,0 +1,5 @@
+<input type="hidden" name="listname" value="{{ listname }}">
+{% for category, entries in literatureEntries %}{% if entries %}<h3>{{ category }}</h3>
+{% for id, content in entries %}<div><input type="checkbox" name="literatureEntry[]" id="lit_{{ id }}" value="{{ id }}"> <label for="lit_{{ id }}">{{ content|raw }}</label></div>{% endfor %}
+{% endif %}{% endfor %}
+<button type="submit" name="selectLiteratureEntries">{{ strAddSelection }}</button><button type="submit" name="cancel">{{ strCancel }}</button>

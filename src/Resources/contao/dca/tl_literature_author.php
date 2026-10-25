@@ -14,7 +14,8 @@ $GLOBALS['TL_DCA']['tl_literature_author'] = array
 	// Config
 	'config' => array
 	(
-		'dataContainer'               => 'Table',
+		'dataContainer'               => \Contao\DC_Table::class,
+        'ptable' => 'tl_literature',
 		'sql' => array
 		(
 			'keys' => array

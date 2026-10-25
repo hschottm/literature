@@ -9,4 +9,3 @@ $GLOBALS['TL_LANG']['tl_literature_category']['show']   = array('Details', 'Show
 $GLOBALS['TL_LANG']['tl_literature_category']['edit']   = array('Edit category', 'Edit category ID %s');
 $GLOBALS['TL_LANG']['tl_literature_category']['copy']   = array('Duplicate category', 'Duplicate category ID %s');
 $GLOBALS['TL_LANG']['tl_literature_category']['delete'] = array('Delete category', 'Delete category ID %s');
-

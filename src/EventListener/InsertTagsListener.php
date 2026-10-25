@@ -1,65 +1,24 @@
 <?php
-
-/*
- * @copyright  Helmut Schottmüller 2020 <http://github.com/hschottm>
- * @author     Helmut Schottmüller (hschottm)
- * @package    contao-literature
- * @license    LGPL-3.0+, CC-BY-NC-3.0
- * @see	      https://github.com/hschottm/literature
- */
-
 namespace Hschottm\LiteratureBundle\EventListener;
 
-use Contao\CoreBundle\Framework\ContaoFrameworkInterface;
+use Contao\CoreBundle\DependencyInjection\Attribute\AsInsertTag;
+use Contao\CoreBundle\Framework\ContaoFramework;
+use Contao\CoreBundle\InsertTag\InsertTagResult;
+use Contao\CoreBundle\InsertTag\OutputType;
+use Contao\CoreBundle\InsertTag\ResolvedInsertTag;
 use Hschottm\LiteratureBundle\LiteraturePreview;
 
 class InsertTagsListener
 {
-    /**
-     * @var ContaoFrameworkInterface
-     */
-    private $framework;
+    public function __construct(private readonly ContaoFramework $framework) {}
 
-    /**
-     * @var array
-     */
-    private $supportedTags = [
-      'insert_literature',
-    ];
-
-    /**
-     * Constructor.
-     *
-     * @param ContaoFrameworkInterface $framework
-     */
-    public function __construct(ContaoFrameworkInterface $framework)
+    #[AsInsertTag('insert_literature')]
+    public function __invoke(ResolvedInsertTag $tag): InsertTagResult
     {
-        $this->framework = $framework;
-    }
-
-    /**
-     * Replaces FAQ insert tags.
-     *
-     * @param string $tag
-     *
-     * @return string|false
-     */
-    public function onReplaceInsertTags($tag)
-    {
-        $elements = explode('::', $tag);
-        $key = strtolower($elements[0]);
-        if (!\in_array($key, $this->supportedTags, true)) {
-            return false;
-        }
-
         $this->framework->initialize();
-
-        if (strcmp($key, "insert_literature") == 0)
-        {
-            $preview = new LiteraturePreview();
-            $preview->loadLiterature($elements[1]);
-            return $preview->getPreview();
-        }
-        return false;
+        $id = $tag->getParameters()->get(0);
+        $preview = new LiteraturePreview();
+        if (is_string($id) && ctype_digit($id)) $preview->loadLiterature((int) $id);
+        return new InsertTagResult($preview->getPreview(), OutputType::html);
     }
 }

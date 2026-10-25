@@ -13,7 +13,7 @@ use \Hschottm\LiteratureBundle\LiteraturePreview;
 /**
  * Load tl_content language file
  */
-$this->loadLanguageFile('tl_content');
+\Contao\System::loadLanguageFile('tl_content');
 
 /**
  * Table tl_literature
@@ -24,10 +24,9 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 	// Config
 	'config' => array
 	(
-		'dataContainer'               => 'Table',
+		'dataContainer'               => \Contao\DC_Table::class,
 		'ptable'                      => 'tl_literature_category',
 		'ctable'                      => array('tl_literature_author', 'tl_literature_editor'),
-		'onload_callback'             => array(array('tl_literature', 'moduleUpdate')),
 		'ondelete_callback'           => array(array('tl_literature', 'deleteLiterature')),
 		'enableVersioning'            => true,
 		'sql' => array
@@ -59,14 +58,14 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_literature']['import'],
 				'href'                => 'key=import',
 				'class'               => 'header_import',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'data-action="contao--scroll-offset#store"'
 			),
 			'all' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'data-action="contao--scroll-offset#store"'
 			)
 		),
 		'operations' => array
@@ -75,33 +74,33 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_literature']['edit'],
 				'href'                => 'act=edit',
-				'icon'                => 'edit.gif'
+				'icon'                => 'edit.svg'
 			),
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_literature']['copy'],
 				'href'                => 'act=copy',
-				'icon'                => 'copy.gif'
+				'icon'                => 'copy.svg'
 			),
 			'cut' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_literature']['cut'],
 				'href'                => 'act=paste&amp;mode=cut',
-				'icon'                => 'cut.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'icon'                => 'cut.svg',
+				'attributes'          => 'data-action="contao--scroll-offset#store"'
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_literature']['delete'],
 				'href'                => 'act=delete',
-				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'icon'                => 'delete.svg',
+				'attributes'          => 'onclick="if (!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? '') . '\')) return false;"'
 			),
 			'show' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_literature']['show'],
 				'href'                => 'act=show',
-				'icon'                => 'show.gif'
+				'icon'                => 'show.svg'
 			)
 		)
 	),
@@ -134,11 +133,11 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'inputType'               => 'multitextWizard',
 			'save_callback'           => array(array('tl_literature', 'saveAuthors')),
 			'load_callback'           => array(array('tl_literature', 'loadAuthors')),
-			'eval'                    => 
+			'eval'                    =>
 				array(
-					'mandatory' => false, 
-					'doNotSaveEmpty'=>true, 
-					'style' => 'width: 100%;', 
+					'mandatory' => false,
+					'doNotSaveEmpty'=>true,
+					'style' => 'width: 100%;',
 					'columns' => array
 					(
 						array
@@ -152,9 +151,9 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 						)
 					),
 					'buttonTitles' => array(
-						'rnew' => $GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_new'], 
-						'rcopy' => $GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_copy'], 
-						'rdelete' => $GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_delete']
+						'rnew' => &$GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_new'],
+						'rcopy' => &$GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_copy'],
+						'rdelete' => &$GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_delete']
 					)
 				),
 			'sql'                     => "blob NULL"
@@ -176,11 +175,11 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'inputType'               => 'multitextWizard',
 			'save_callback'           => array(array('tl_literature', 'saveEditors')),
 			'load_callback'           => array(array('tl_literature', 'loadEditors')),
-			'eval'                    => 
+			'eval'                    =>
 				array(
-					'mandatory' => false, 
-					'doNotSaveEmpty'=>true, 
-					'style'=>'width:100%;', 
+					'mandatory' => false,
+					'doNotSaveEmpty'=>true,
+					'style'=>'width:100%;',
 					'columns' => array
 					(
 						array
@@ -195,9 +194,9 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 					),
 					'tl_class'=>'full',
 					'buttonTitles' => array(
-						'rnew' => $GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_new'], 
-						'rcopy' => $GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_copy'], 
-						'rdelete' => $GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_delete']
+						'rnew' => &$GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_new'],
+						'rcopy' => &$GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_copy'],
+						'rdelete' => &$GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_delete']
 					)
 				),
 			'sql'                     => "blob NULL"
@@ -318,7 +317,7 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_literature']['uri_date'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>32, 'rgxp' => 'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard'),
+			'eval'                    => array('maxlength'=>32, 'rgxp' => 'date', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
 		'released' => array
@@ -448,11 +447,7 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50 wizard'),
-			'wizard' => array
-			(
-				array('tl_literature', 'pagePicker')
-			),
+			'eval'                    => array('dcaPicker'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'fullsize' => array
@@ -533,7 +528,7 @@ $GLOBALS['TL_DCA']['tl_literature'] = array
 	)
 );
 
-if (!class_exists(\TagList::class))
+if (!class_exists(\Hschottm\TagsBundle\TagList::class))
 {
 	// Palettes
 	$GLOBALS['TL_DCA']['tl_literature']['palettes'] = array
@@ -560,11 +555,11 @@ if (!class_exists(\TagList::class))
  * Class tl_literature
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Helmut Schottmüller 2008 
+ * @copyright  Helmut Schottmüller 2008
  * @author     Helmut Schottmüller <typolight@aurealis.de>
  * @package    Controller
  */
-class tl_literature extends Backend
+class tl_literature extends \Contao\Backend
 {
 	/**
 	 * Compile format definitions and return them as string
@@ -577,51 +572,17 @@ class tl_literature extends Backend
 		$preview = new \Hschottm\LiteratureBundle\LiteraturePreview($row);
 		return $preview->getPreview();
 	}
-	
+
 	/**
 	 * Delete the tags of a literature entry
 	 */
 	public function deleteLiterature($dc)
 	{
-		$this->Database->prepare("DELETE FROM tl_tag WHERE from_table = ? AND id = ?")
+        if (!\Contao\Database::getInstance()->tableExists('tl_tag')) return;
+		\Contao\Database::getInstance()->prepare("DELETE FROM tl_tag WHERE from_table = ? AND tid = ?")
 			->execute($dc->table, $dc->id);
 	}
 
-	/**
-	 * Update the module
-	 */
-	public function moduleUpdate()
-	{
-		switch ($GLOBALS['TL_CONFIG']['literature'])
-		{
-			case 1:
-				break;
-			default:
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['literature']", 1);
-				$objLiterature = $this->Database->prepare("SELECT * FROM tl_literature")
-					->execute();
-				if ($objLiterature->numRows > 0)
-				{
-					while ($objLiterature->next())
-					{
-						$objAuthors = $this->Database->prepare("SELECT * FROM tl_literature_author WHERE pid = ? ORDER BY sequence")
-							->execute($objLiterature->id);
-						$sortstring = '';
-						while ($objAuthors->next())
-						{
-							$sortstring .= $objAuthors->lastname . ',' . $objAuthors->firstname;
-						}
-						if (strlen($sortstring))
-						{
-							$this->Database->prepare("UPDATE tl_literature SET authorssort = ? WHERE id = ?")
-								->execute($sortstring, $objLiterature->id);
-						}
-					}
-				}
-				break;
-		}
-	}
-	
 	/**
 	 * Callback on save the title sort field for literature entries
 	 * @param string
@@ -632,12 +593,12 @@ class tl_literature extends Backend
 	{
 		if (strlen($value))
 		{
-			$this->Database->prepare("UPDATE tl_literature SET titlesort = ? WHERE id = ?")
+			\Contao\Database::getInstance()->prepare("UPDATE tl_literature SET titlesort = ? WHERE id = ?")
 				->execute($value, $dc->id);
 		}
 		return $value;
 	}
-	
+
 	/**
 	 * Callback on save the literature authors
 	 * @param string
@@ -646,26 +607,23 @@ class tl_literature extends Backend
 	 */
 	public function saveAuthors($value, $dc)
 	{
-		$authors = deserialize($value, TRUE);
+		$authors = \Contao\StringUtil::deserialize($value, TRUE);
 		$position = 1;
 		$sortstring = '';
-		$this->Database->prepare("DELETE FROM tl_literature_author WHERE pid = ?")
+		\Contao\Database::getInstance()->prepare("DELETE FROM tl_literature_author WHERE pid = ?")
 			->execute($dc->id);
 		foreach ($authors as $author)
 		{
 			if (is_array($author))
 			{
-				$this->Database->prepare("INSERT INTO tl_literature_author (pid, sequence, firstname, lastname) VALUES (?, ?, ?, ?)")
-					->execute($dc->id, $position, $author[0], $author[1]);
-				$sortstring .= $author[1] . ',' . $author[0];
+				\Contao\Database::getInstance()->prepare("INSERT INTO tl_literature_author (pid, sequence, firstname, lastname) VALUES (?, ?, ?, ?)")
+					->execute($dc->id, $position, $author[0] ?? '', $author[1] ?? '');
+				$sortstring .= ($author[1] ?? '') . ',' . ($author[0] ?? '');
 				$position++;
 			}
 		}
-		if (strlen($sortstring))
-		{
-			$this->Database->prepare("UPDATE tl_literature SET authorssort = ? WHERE id = ?")
-				->execute($sortstring, $dc->id);
-		}
+		\Contao\Database::getInstance()->prepare("UPDATE tl_literature SET authorssort = ? WHERE id = ?")
+			->execute($sortstring, $dc->id);
 		return NULL;
 	}
 
@@ -677,7 +635,7 @@ class tl_literature extends Backend
 	 */
 	public function loadAuthors($value, $dc)
 	{
-		$objAuthor = $this->Database->prepare("SELECT * FROM tl_literature_author WHERE pid = ? ORDER BY sequence")
+		$objAuthor = \Contao\Database::getInstance()->prepare("SELECT * FROM tl_literature_author WHERE pid = ? ORDER BY sequence")
 			->execute($dc->id);
 		$authors = array();
 		if ($objAuthor->numRows)
@@ -692,7 +650,7 @@ class tl_literature extends Backend
 
 	public function loadAuthorsSort($value, $dc)
 	{
-		$objAuthor = $this->Database->prepare("SELECT * FROM tl_literature_author WHERE pid = ? ORDER BY sequence")
+		$objAuthor = \Contao\Database::getInstance()->prepare("SELECT * FROM tl_literature_author WHERE pid = ? ORDER BY sequence")
 			->execute($dc->id);
 		$authorssort = '';
 		if ($objAuthor->numRows)
@@ -713,16 +671,16 @@ class tl_literature extends Backend
 	 */
 	public function saveEditors($value, $dc)
 	{
-		$editors = deserialize($value, TRUE);
+		$editors = \Contao\StringUtil::deserialize($value, TRUE);
 		$position = 1;
-		$this->Database->prepare("DELETE FROM tl_literature_editor WHERE pid = ?")
+		\Contao\Database::getInstance()->prepare("DELETE FROM tl_literature_editor WHERE pid = ?")
 			->execute($dc->id);
 		foreach ($editors as $editor)
 		{
 			if (is_array($editor))
 			{
-				$this->Database->prepare("INSERT INTO tl_literature_editor (pid, sequence, firstname, lastname) VALUES (?, ?, ?, ?)")
-					->execute($dc->id, $position, $editor[0], $editor[1]);
+				\Contao\Database::getInstance()->prepare("INSERT INTO tl_literature_editor (pid, sequence, firstname, lastname) VALUES (?, ?, ?, ?)")
+					->execute($dc->id, $position, $editor[0] ?? '', $editor[1] ?? '');
 				$position++;
 			}
 		}
@@ -737,7 +695,7 @@ class tl_literature extends Backend
 	 */
 	public function loadEditors($value, $dc)
 	{
-		$objEditor = $this->Database->prepare("SELECT * FROM tl_literature_editor WHERE pid = ? ORDER BY sequence")
+		$objEditor = \Contao\Database::getInstance()->prepare("SELECT * FROM tl_literature_editor WHERE pid = ? ORDER BY sequence")
 			->execute($dc->id);
 		$editors = array();
 		if ($objEditor->numRows)
@@ -750,16 +708,11 @@ class tl_literature extends Backend
 		return serialize($editors);
 	}
 
-	/**
-	 * Return the link picker wizard
-	 * @param object
-	 * @return string
-	 */
-	public function pagePicker(DataContainer $dc)
-	{
-		$strField = 'ctrl_' . $dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '');
-		return ' ' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top; cursor:pointer;" onclick="Backend.pickPage(\'' . $strField . '\')"');
-	}
 }
 
-?>
+if (!class_exists(\Hschottm\TagsBundle\TagList::class)) {
+    foreach ($GLOBALS['TL_DCA']['tl_literature']['palettes'] as &$palette) {
+        if (is_string($palette)) $palette = str_replace(';{tags_legend},tags', '', $palette);
+    }
+    unset($palette);
+}

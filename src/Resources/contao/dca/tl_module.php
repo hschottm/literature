@@ -16,20 +16,20 @@
  * @author     Helmut Schottmüller <https://github.com/hschottm/literature>
  * @package    Controller
  */
-class tl_module_literaturelist extends Backend
+class tl_module_literaturelist extends \Contao\Backend
 {
-	public function getLitrefTemplates(DataContainer $dc)
+	public function getLitrefTemplates(\Contao\DataContainer $dc)
 	{
 		return $this->getTemplateGroup('litref_');
-	}  
+	}
 }
 
 
 /**
  * Add palettes to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['literaturelist'] = '{title_legend},name,type,headline;{literature_legend},lit_listtitle,lit_categories,perPage,lit_tags,lit_template;{litsort_legend},lit_showsort;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['literaturesearch'] = '{title_legend},name,type,headline;{redirect_legend},jumpTo;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['literaturelist'] = '{title_legend},name,type,headline;{literature_legend},lit_listtitle,lit_categories,perPage,lit_tags,lit_template;{litsort_legend},lit_showsort;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['literaturesearch'] = '{title_legend},name,type,headline;{redirect_legend},jumpTo;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID';
 $GLOBALS['TL_DCA']['tl_module']['subpalettes']['lit_showsort'] = 'lit_sort,lit_sortorder';
 
 array_push($GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'], 'lit_showsort');
@@ -102,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['lit_sortorder'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['lit_tags'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['lit_tags'],
-	'inputType'               => 'tag',
+	'inputType'               => 'text',
 	'eval'                    => array('table' => 'tl_literature', 'isTag' => FALSE, 'tl_class'=>'clr long'),
 	'sql'                     => "blob NULL"
 );

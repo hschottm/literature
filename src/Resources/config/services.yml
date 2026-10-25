@@ -1,9 +1,4 @@
 services:
-    _instanceof:
-        Contao\CoreBundle\Framework\FrameworkAwareInterface:
-            calls:
-                - ["setFramework", ["@contao.framework"]]
-
-        Symfony\Component\DependencyInjection\ContainerAwareInterface:
-            calls:
-                - ["setContainer", ["@service_container"]]
+    Hschottm\LiteratureBundle\Migration\AuthorSortMigration:
+        arguments: ['@database_connection']
+        tags: ['contao.migration']

@@ -105,4 +105,12 @@ $GLOBALS['TL_LANG']['tl_literature']['uri_legend'] = "Internet-Verweise";
 $GLOBALS['TL_LANG']['tl_literature']['image_legend'] = "Bild-Einstellungen";
 $GLOBALS['TL_LANG']['tl_literature']['downloads_legend'] = "Download-Einstellungen";
 $GLOBALS['TL_LANG']['tl_literature']['abstract_legend'] = "Inhaltsangabe";
- 
+
+$GLOBALS['TL_LANG']['tl_literature']['invalidBibtex'] = 'Die BibTeX-Datei konnte nicht importiert werden. Bitte Format und Zielkategorie prüfen.';
+
+$GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_new'] = 'Autor: Neu';
+$GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_copy'] = 'Autor: Kopieren';
+$GLOBALS['TL_LANG']['tl_literature']['buttontitle_author_delete'] = 'Autor: Löschen';
+$GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_new'] = 'Herausgeber: Neu';
+$GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_copy'] = 'Herausgeber: Kopieren';
+$GLOBALS['TL_LANG']['tl_literature']['buttontitle_editor_delete'] = 'Herausgeber: Löschen';

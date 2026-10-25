@@ -1,216 +1,81 @@
 <?php
-
-/**
- * @copyright  Helmut Schottmüller 2009-2020 <http://github.com/hschottm>
- * @author     Helmut Schottmüller (hschottm)
- * @package    hschottm/contao-literature
- * @license    LGPL-3.0+, CC-BY-NC-3.0
- * @see	      https://github.com/hschottm/literature
- */
-
 namespace Hschottm\LiteratureBundle;
 
-use Hschottm\LiteratureBundle\LiteraturePreview;
+use Contao\{Module, BackendTemplate, Database, Input, StringUtil, System};
+use Contao\CoreBundle\Pagination\{PaginationConfig, LegacyTemplatePaginationProxy};
+use Contao\CoreBundle\Exception\PageNotFoundException;
+use Contao\CoreBundle\Exception\PageOutOfRangeException;
 
-class ModuleLiteratureList extends \Module
+class ModuleLiteratureList extends Module
 {
-	/**
-	 * Template
-	 * @var string
-	 */
-	protected $strTemplate = 'mod_literaturelist';
+    protected $strTemplate = 'mod_literaturelist';
+    protected $arrCategories = [];
+    public const SEARCH_FIELDS = ['titlesort','authorssort','title_journal','location','publisher','released'];
 
-	/**
-	 * Categories
-	 * @var array
-	 */
-	protected $arrCategories = array();
+    public function generate()
+    {
+        $request = System::getContainer()->get('request_stack')->getCurrentRequest();
+        if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request)) {
+            $template = new BackendTemplate('be_wildcard');
+            $template->wildcard = '### LITERATURE LIST ###';
+            return $template->parse();
+        }
+        $this->arrCategories = array_filter(array_map('intval', StringUtil::deserialize($this->lit_categories, true)));
+        return $this->arrCategories ? parent::generate() : '';
+    }
 
-	/**
-	 * Display a wildcard in the back end
-	 * @return string
-	 */
-	public function generate()
-	{
-		if (TL_MODE == 'BE')
-		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
-			$objTemplate->wildcard = '### LITERATURELIST ###';
+    protected function compile()
+    {
+        System::loadLanguageFile('tl_literature');
+        $this->listLiterature();
+    }
 
-			return $objTemplate->parse();
-		}
-
-		$file = \Input::get('file', true);
-
-		// Send the file to the browser
-		if ($file != '' && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($file)))
-		{
-			$this->sendFileToBrowser($file);
-			return '';
-		}
-
-
-		$this->arrCategories = deserialize($this->lit_categories, true);
-
-		if (count($this->arrCategories) < 1)
-		{
-			return '';
-		}
-
-		return parent::generate();
-	}
-
-
-	/**
-	 * Generate module
-	 */
-	protected function compile()
-	{
-		$this->loadDataContainer('tl_literature');
-		$this->loadLanguageFile('tl_literature');
-		$this->listLiterature();
-	}
-
-	/**
-	 * List literature entries
-	 */
-	protected function listLiterature()
-	{
-		$strWhere = "";
-		$arrValues = array();
-
-		// Split results
-		$page = \Input::get('page') ? \Input::get('page') : 1;
-		$per_page = \Input::get('per_page') ? \Input::get('per_page') : $this->perPage;
-
-		$sortdirection = (strlen($this->lit_sortorder)) ? $this->lit_sortorder : "ASC";
-		switch ($this->lit_sort)
-		{
-			case "released":
-				$order_by = "released $sortdirection, titlesort ";
-				break;
-			case "title":
-				$order_by = "titlesort $sortdirection, released ";
-				break;
-			case "author":
-				$order_by = "authorssort $sortdirection, released, titlesort ";
-				break;
-			default:
-				$order_by = "released $sortdirection, titlesort ";
-				break;
-		}
-
-		$this->Template->listtitle = $this->lit_listtitle;
-
-		$strWhere = "";
-		if (class_exists(\TagList::class))
-		{
-			$tags = (strlen($this->lit_tags)) ? array_filter(trimsplit(",", $this->lit_tags), 'strlen') : array();
-			$relatedlist = (strlen(\Input::get('related'))) ? split(",", \Input::get('related')) : array();
-			$searchtags = (strlen(\Input::get('tag'))) ? array(\Input::get('tag')) : array();
-			$searchtags = array_merge($searchtags, $relatedlist);
-			if (count($tags))
-			{
-				$alltags = array();
-				if (count($searchtags))
-				{
-					foreach ($searchtags as $tag) {
-					if (in_array($tag, $tags)) array_push($alltags, $tag);
-					}
-				}
-				else {
-					$alltags = $tags;
-				}
-			} else $alltags = $searchtags;
-			$tagids = array();
-			foreach ($alltags as $tag)
-			{
-				if (count($tagids))
-				{
-					$tagids = $this->Database->prepare("SELECT tid FROM tl_tag WHERE from_table = ? AND tag = ? AND id IN (" . join($tagids, ",") . ")")
-						->execute('tl_literature', $tag)
-						->fetchEach('tid');
-				}
-				else
-				{
-					$tagids = $this->Database->prepare("SELECT tid FROM tl_tag WHERE from_table = ? AND tag = ?")
-						->execute('tl_literature', $tag)
-						->fetchEach('tid');
-				}
-			}
-			if (count($tagids) == 0)
-			{
-				if (strlen(\Input::get('tag')))
-				{
-					$this->Template->tbody = array();
-					return;
-				}
-				if (count($tags))
-				{
-					foreach ($tags as $tag)
-					{
-						$arrIds = $this->Database->prepare("SELECT tid FROM tl_tag WHERE from_table = ? AND tag = ?")
-							->execute('tl_literature', $tag)
-							->fetchEach('tid');
-						$tagids = array_merge($tagids, $arrIds);
-					}
-				}
-			}
-			if (count($tagids))
-			{
-				$strWhere = " AND id IN (" . join($tagids, ",") . ")";
-			}
-		}
-		$searchfilter = '';
-		$params = array();
-		if (strlen(\Input::get('search')) && strlen(\Input::get('for')))
-		{
-			$searchfilter = ' AND ' . \Input::get('search') . ' LIKE ?';
-			array_push($params, '%' . \Input::get('for') . '%');
-		}
-
-		// Get total number of literature entries
-		$objTotal = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_literature WHERE pid IN (" . join($this->arrCategories, ",") . ")$strWhere$searchfilter ORDER BY " . $order_by)->execute($params);
-
-		$objLiteratureStmt = $this->Database->prepare("SELECT * FROM tl_literature WHERE pid IN (" . join($this->arrCategories, ",") . ")$strWhere$searchfilter ORDER BY " . $order_by);
-		// Limit
-		if ($per_page)
-		{
-			$objLiteratureStmt->limit($per_page, (($page - 1) * $per_page));
-		}
-
-		$objLiterature = $objLiteratureStmt->execute($params);
-
-		$start = -1;
-		$limit = $objLiterature->numRows;
-		$lit_template = (strlen($this->lit_template)) ? $this->lit_template : "litref_standard";
-		$arrData = array();
-
-		while ($objLiterature->next())
-		{
-			$class = 'row_' . ++$start . (($start == 0) ? ' row_first' : '') . ((($start + 1) == $limit) ? ' row_last' : '') . ((($start % 2) == 0) ? ' even' : ' odd');
-			$litdata = $objLiterature->row();
-			$litdata['urishort'] = $litdata['uri'];
-			if (strlen($litdata['uri']))
-			{
-				if (preg_match("/^([a-zA-Z]+:\\/\\/.*?\\/).*$/", $litdata['uri'], $matches))
-				{
-					$litdata['urishort'] = $matches[1];
-				}
-			}
-			$preview = new LiteraturePreview($litdata, $lit_template);
-			$arrData[$class] = array(
-				'raw' => $litdata,
-				'content' => $preview->getPreview(),
-				'class' => 'col_first',
-				'id' => $objLiterature->id
-			);
-		}
-
-		$this->Template->tbody = $arrData;
-		// Pagination
-		$objPagination = new \Pagination($objTotal->count, $per_page);
-		$this->Template->pagination = $objPagination->generate("\n  ");
-		$this->Template->per_page = $per_page;
-	}
+    protected function listLiterature()
+    {
+        $where = 'pid IN ('.implode(',', $this->arrCategories).')';
+        $params = [];
+        if (class_exists(\Hschottm\TagsBundle\Service\TagFilter::class)) {
+            $ids = System::getContainer()->get(\Hschottm\TagsBundle\Service\TagFilter::class)->findIds('tl_literature', (string) $this->lit_tags);
+            if ($ids !== null) $where .= $ids ? ' AND id IN ('.implode(',', array_map('intval', $ids)).')' : ' AND 1=0';
+        }
+        $search = Input::get('search');
+        $term = Input::get('for');
+        if (in_array($search, self::SEARCH_FIELDS, true) && is_string($term) && $term !== '') {
+            $where .= ' AND '.$search.' LIKE ?';
+            $params[] = '%'.$term.'%';
+        }
+        $direction = strtolower((string) $this->lit_sortorder) === 'desc' ? 'DESC' : 'ASC';
+        $field = match ($this->lit_sort) { 'title' => 'titlesort', 'author' => 'authorssort', default => 'released' };
+        $order = $field.' '.$direction.', titlesort, id';
+        $db = Database::getInstance();
+        $total = (int) $db->prepare('SELECT COUNT(*) AS total FROM tl_literature WHERE '.$where)->execute(...$params)->total;
+        $perPage = max(0, (int) $this->perPage);
+        $requested = Input::get('per_page');
+        if (is_scalar($requested) && ctype_digit((string) $requested) && (int) $requested > 0) $perPage = min(500, (int) $requested);
+        $offset = 0;
+        $this->Template->pagination = '';
+        if ($perPage > 0 && $total > 0) {
+            try {
+                $pagination = System::getContainer()->get('contao.pagination.factory')->create(new PaginationConfig('page_l'.$this->id, $total, $perPage));
+            } catch (PageOutOfRangeException $e) {
+                throw new PageNotFoundException('Literature page out of range', previous: $e);
+            }
+            $offset = $pagination->getOffset();
+            $this->Template->pagination = new LegacyTemplatePaginationProxy(System::getContainer()->get('twig'), $pagination);
+        }
+        $statement = $db->prepare('SELECT * FROM tl_literature WHERE '.$where.' ORDER BY '.$order);
+        if ($perPage) $statement->limit($perPage, $offset);
+        $entries = $statement->execute(...$params);
+        $rows = [];
+        while ($entries->next()) {
+            $data = $entries->row();
+            $index = count($rows);
+            $class = 'row_'.$index.($index === 0 ? ' row_first' : '').($index === $entries->numRows-1 ? ' row_last' : '').($index % 2 ? ' odd' : ' even');
+            $preview = new LiteraturePreview($data, $this->lit_template ?: 'litref_standard');
+            $rows[$class] = ['raw'=>$data, 'content'=>$preview->getPreview(), 'class'=>'col_first', 'id'=>$data['id']];
+        }
+        $this->Template->tbody = $rows;
+        $this->Template->listtitle = $this->lit_listtitle;
+        $this->Template->per_page = $perPage;
+    }
 }

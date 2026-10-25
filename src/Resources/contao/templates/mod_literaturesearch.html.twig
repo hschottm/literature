@@ -1,0 +1,9 @@
+{% extends '@Contao/block_unsearchable.html.twig' %}
+{% block content %}
+<form action="{{ action }}" method="get" class="lit_search">
+<label for="ctrl_literaturesearch_{{ id }}">{{ fields_label }}</label>
+<select name="search" id="ctrl_literaturesearch_{{ id }}">{% for value, label in search_fields %}<option value="{{ value }}"{% if value == search %} selected{% endif %}>{{ label }}</option>{% endfor %}</select>
+<label for="ctrl_for_{{ id }}">{{ keywords_label }}</label><input type="text" name="for" id="ctrl_for_{{ id }}" value="{{ for }}">
+<button type="submit">{{ search_label }}</button>
+</form>
+{% endblock %}
