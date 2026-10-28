@@ -25,7 +25,7 @@
     "php": "^8.3",
     "contao/core-bundle": "^5.7",
     "contao/manager-plugin": "^2.0",
-    "hschottm/contao-multitextwizard": "dev-contao57 || dev-master",
+    "hschottm/contao-multitextwizard": "^1.4",
     "renanbr/bibtex-parser": "^2.3"
   },
   "autoload": {
