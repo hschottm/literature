@@ -1,0 +1,29 @@
+<?php
+
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][0] = 'Stile di riferimento';
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][1] = 'Si prega di scegliere un layout per l\'output della letteratura. Puoi aggiungere layout <em>litref_</em> personalizzati alla cartella <em>templates</em>.';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][0] = 'Categorie';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][1] = 'Seleziona una o più categorie per creare l\'elenco della letteratura.';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][0] = 'Titolo dell\'elenco';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][1] = 'Inserisci un titolo per l\'elenco della letteratura.';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][0] = 'Ordina le opzioni';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][1] = 'Scegli questa opzione per ordinare l\'elenco della letteratura.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['0'] = 'Ordina per';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['1'] = 'Selezionare la colonna di ordinamento per l\'elenco della letteratura.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][0] = 'Ordina per titolo';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][1] = 'Scegli questa opzione per ordinare l\'elenco della letteratura per titolo.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][0] = 'Ordina per data';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][1] = 'Scegli questa opzione per ordinare l\'elenco della letteratura in base alla data di rilascio.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][0] = 'Ordina per autore';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][1] = 'Scegli questa opzione per ordinare l\'elenco della letteratura per autore.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['0'] = 'Ordinamento';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['1'] = 'Selezionare l\'ordinamento dell\'elenco della letteratura.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][0] = 'Ascendente';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][1] = 'Scegli questa opzione per utilizzare l\'ordinamento crescente della colonna di ordinamento selezionata.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][0] = 'Discendente';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][1] = 'Scegli questa opzione per utilizzare l\'ordinamento discendente della colonna di ordinamento selezionata.';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][0] = 'Tag';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][1] = 'Inserisci uno o più tag separati da virgole per mostrare solo i riferimenti bibliografici contrassegnati con uno di questi tag.';
+$GLOBALS['TL_LANG']['tl_module']['pagetype']['literature'] = 'Elenco bibliografico';
+$GLOBALS['TL_LANG']['tl_module']['litsort_legend'] = 'Ordina le opzioni';
+$GLOBALS['TL_LANG']['tl_module']['literature_legend'] = 'Elenco bibliografico';

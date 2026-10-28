@@ -1,0 +1,29 @@
+<?php
+
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][0] = 'Referans stili';
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][1] = 'Lütfen literatür çıktısı için bir düzen seçin. Özel <em>litref_</em> düzenlerini <em>templates</em> klasörüne ekleyebilirsiniz.';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][0] = 'Kategoriler';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][1] = 'Literatür listesini oluşturmak için lütfen bir veya daha fazla kategori seçin.';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][0] = 'Liste başlığı';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][1] = 'Lütfen literatür listesi için bir liste başlığı girin.';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][0] = 'Sıralama seçenekleri';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][1] = 'Literatür listesini sıralamak için bu seçeneği seçin.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['0'] = 'Sırala';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['1'] = 'Lütfen literatür listesi için sıralama sütununu seçin.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][0] = 'Başlığa göre sırala';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][1] = 'Literatür listesini başlığa göre sıralamak için bu seçeneği seçin.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][0] = 'Tarihe göre sırala';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][1] = 'Literatür listesini yayınlanma tarihine göre sıralamak için bu seçeneği seçin.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][0] = 'Yazara göre sırala';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][1] = 'Literatür listesini yazara göre sıralamak için bu seçeneği seçin.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['0'] = 'Sıralama düzeni';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['1'] = 'Lütfen literatür listesinin sıralama düzenini seçin.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][0] = 'Artan';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][1] = 'Seçilen sıralama sütununun artan sıralama düzenini kullanmak için bu seçeneği belirleyin.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][0] = 'Azalan';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][1] = 'Seçilen sıralama sütununun azalan sıralama düzenini kullanmak için bu seçeneği belirleyin.';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][0] = 'Etiketler';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][1] = 'Yalnızca bu etiketlerden biriyle etiketlenen literatür referanslarını göstermek için lütfen bir veya daha fazla virgülle ayrılmış etiket girin.';
+$GLOBALS['TL_LANG']['tl_module']['pagetype']['literature'] = 'Literatür listesi';
+$GLOBALS['TL_LANG']['tl_module']['litsort_legend'] = 'Sıralama seçenekleri';
+$GLOBALS['TL_LANG']['tl_module']['literature_legend'] = 'Literatür listesi';

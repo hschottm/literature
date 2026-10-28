@@ -1,0 +1,29 @@
+<?php
+
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][0] = 'Справочный стиль';
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][1] = 'Пожалуйста, выберите макет для вывода литературы. Вы можете добавить собственные макеты <em>litref_</em> в папку <em>templates</em>.';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][0] = 'Категории';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][1] = 'Пожалуйста, выберите одну или несколько категорий, чтобы составить список литературы.';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][0] = 'Название списка';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][1] = 'Введите название списка литературы.';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][0] = 'Варианты сортировки';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][1] = 'Выберите этот вариант, чтобы отсортировать список литературы.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['0'] = 'Сортировать по';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['1'] = 'Пожалуйста, выберите столбец сортировки для списка литературы.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][0] = 'Сортировать по названию';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][1] = 'Выберите этот вариант, чтобы отсортировать список литературы по названию.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][0] = 'Сортировать по дате';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][1] = 'Выберите этот вариант, чтобы отсортировать список литературы по дате выпуска.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][0] = 'Сортировать по автору';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][1] = 'Выберите этот вариант, чтобы отсортировать список литературы по авторам.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['0'] = 'Порядок сортировки';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['1'] = 'Пожалуйста, выберите порядок сортировки списка литературы.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][0] = 'восходящий';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][1] = 'Выберите этот параметр, чтобы использовать порядок сортировки по возрастанию выбранного столбца сортировки.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][0] = 'По убыванию';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][1] = 'Выберите этот параметр, чтобы использовать порядок сортировки по убыванию выбранного столбца сортировки.';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][0] = 'Теги';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][1] = 'Введите один или несколько тегов, разделенных запятыми, чтобы отображались только ссылки на литературу, отмеченные одним из этих тегов.';
+$GLOBALS['TL_LANG']['tl_module']['pagetype']['literature'] = 'Список литературы';
+$GLOBALS['TL_LANG']['tl_module']['litsort_legend'] = 'Варианты сортировки';
+$GLOBALS['TL_LANG']['tl_module']['literature_legend'] = 'Список литературы';

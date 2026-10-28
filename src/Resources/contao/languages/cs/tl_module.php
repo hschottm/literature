@@ -1,0 +1,29 @@
+<?php
+
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][0] = 'Referenční styl';
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][1] = 'Vyberte prosím rozvržení pro výstup literatury. Do složky <em>templates</em> můžete přidat vlastní rozvržení <em>litref_</em>.';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][0] = 'kategorie';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][1] = 'Please select one ore more categories to build the literature list.';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][0] = 'Název seznamu';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][1] = 'Zadejte název seznamu pro seznam literatury.';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][0] = 'Možnosti řazení';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][1] = 'Tuto možnost vyberte, chcete-li seznam literatury seřadit.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['0'] = 'Seřadit podle';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['1'] = 'Vyberte prosím třídicí sloupec pro seznam literatury.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][0] = 'Seřadit podle názvu';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][1] = 'Tuto možnost vyberte, chcete-li seřadit seznam literatury podle názvu.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][0] = 'Seřadit podle data';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][1] = 'Tuto možnost vyberte, chcete-li seznam literatury seřadit podle data vydání.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][0] = 'Seřadit podle autora';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][1] = 'Tuto možnost vyberte, chcete-li seřadit seznam literatury podle autora.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['0'] = 'Řadit pořadí';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['1'] = 'Vyberte prosím pořadí řazení seznamu literatury.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][0] = 'Vzestupně';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][1] = 'Tuto možnost vyberte, chcete-li použít vzestupné řazení vybraného sloupce řazení.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][0] = 'Sestupně';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][1] = 'Tuto možnost vyberte, chcete-li použít sestupné řazení vybraného sloupce řazení.';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][0] = 'Tagy';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][1] = 'Zadejte prosím jeden nebo více štítků oddělených čárkami, aby se zobrazily pouze odkazy na literaturu, které jsou označeny jedním z těchto štítků.';
+$GLOBALS['TL_LANG']['tl_module']['pagetype']['literature'] = 'Seznam literatury';
+$GLOBALS['TL_LANG']['tl_module']['litsort_legend'] = 'Možnosti řazení';
+$GLOBALS['TL_LANG']['tl_module']['literature_legend'] = 'Seznam literatury';

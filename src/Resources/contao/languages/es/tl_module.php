@@ -1,0 +1,29 @@
+<?php
+
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][0] = 'Estilo de referencia';
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][1] = 'Elija un diseño para la producción de literatura. Puede agregar diseños personalizados <em>litref_</em> a la carpeta <em>templates</em>.';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][0] = 'Categorías';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][1] = 'Seleccione una o más categorías para crear la lista de literatura.';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][0] = 'Título de la lista';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][1] = 'Ingrese un título de lista para la lista de literatura.';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][0] = 'Opciones de clasificación';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][1] = 'Elija esta opción para ordenar la lista de literatura.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['0'] = 'Ordenar por';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['1'] = 'Seleccione la columna de clasificación para la lista de literatura.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][0] = 'Ordenar por título';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][1] = 'Elija esta opción para ordenar la lista de literatura por título.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][0] = 'Ordenar por fecha';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][1] = 'Elija esta opción para ordenar la lista de literatura por fecha de publicación.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][0] = 'Ordenar por autor';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][1] = 'Elija esta opción para ordenar la lista de literatura por autor.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['0'] = 'orden de clasificación';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['1'] = 'Seleccione el orden de clasificación de la lista de literatura.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][0] = 'Ascendente';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][1] = 'Elija esta opción para utilizar el orden de clasificación ascendente de la columna de clasificación seleccionada.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][0] = 'Descendente';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][1] = 'Elija esta opción para utilizar el orden de clasificación descendente de la columna de clasificación seleccionada.';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][0] = 'Etiquetas';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][1] = 'Ingrese una o más etiquetas separadas por comas para mostrar solo las referencias bibliográficas etiquetadas con una de estas etiquetas.';
+$GLOBALS['TL_LANG']['tl_module']['pagetype']['literature'] = 'Lista bibliográfica';
+$GLOBALS['TL_LANG']['tl_module']['litsort_legend'] = 'Opciones de clasificación';
+$GLOBALS['TL_LANG']['tl_module']['literature_legend'] = 'Lista bibliográfica';

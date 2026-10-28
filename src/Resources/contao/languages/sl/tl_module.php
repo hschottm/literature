@@ -1,0 +1,29 @@
+<?php
+
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][0] = 'Referenčni slog';
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][1] = 'Prosimo izberite postavitev za literaturo. V mapo <em>templates</em> lahko dodate postavitve <em>litref_</em> po meri.';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][0] = 'kategorije';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][1] = 'Izberite eno ali več kategorij, da sestavite seznam literature.';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][0] = 'Naslov seznama';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][1] = 'Vnesite naslov seznama za seznam literature.';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][0] = 'Možnosti razvrščanja';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][1] = 'Izberite to možnost za razvrščanje seznama literature.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['0'] = 'Razvrsti po';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['1'] = 'Za seznam literature izberite stolpec za razvrščanje.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][0] = 'Razvrsti po naslovu';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][1] = 'Izberite to možnost, če želite seznam literature razvrstiti po naslovu.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][0] = 'Razvrsti po datumu';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][1] = 'Izberite to možnost, če želite seznam literature razvrstiti po datumu izdaje.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][0] = 'Razvrsti po avtorju';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][1] = 'Izberite to možnost, če želite seznam literature razvrstiti po avtorju.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['0'] = 'Vrstni red';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['1'] = 'Izberite vrstni red seznama literature.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][0] = 'Naraščajoče';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][1] = 'Izberite to možnost, če želite uporabiti naraščajoči vrstni red izbranega stolpca za razvrščanje.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][0] = 'Sestopanje';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][1] = 'Izberite to možnost, če želite uporabiti padajoči vrstni red izbranega stolpca za razvrščanje.';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][0] = 'Oznake';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][1] = 'Prosimo, vnesite eno ali več oznak, ločenih z vejicami, da prikažete samo reference literature, ki so označene z eno od teh oznak.';
+$GLOBALS['TL_LANG']['tl_module']['pagetype']['literature'] = 'Seznam literature';
+$GLOBALS['TL_LANG']['tl_module']['litsort_legend'] = 'Možnosti razvrščanja';
+$GLOBALS['TL_LANG']['tl_module']['literature_legend'] = 'Seznam literature';

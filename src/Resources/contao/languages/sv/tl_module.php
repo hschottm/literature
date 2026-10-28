@@ -1,0 +1,29 @@
+<?php
+
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][0] = 'Referensstil';
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][1] = 'Välj en layout för litteraturutdata. Du kan lägga till anpassade <em>litref_</em>-layouter till mappen <em>templates</em>.';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][0] = 'Kategorier';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][1] = 'Välj en eller flera kategorier för att skapa litteraturlistan.';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][0] = 'Listans titel';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][1] = 'Vänligen ange en listtitel för litteraturlistan.';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][0] = 'Sorteringsalternativ';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][1] = 'Välj det här alternativet för att sortera litteraturlistan.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['0'] = 'Sortera efter';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['1'] = 'Välj sorteringskolumn för litteraturlistan.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][0] = 'Sortera efter titel';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][1] = 'Välj det här alternativet för att sortera litteraturlistan efter titel.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][0] = 'Sortera efter datum';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][1] = 'Välj det här alternativet för att sortera litteraturlistan efter utgivningsdatum.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][0] = 'Sortera efter författare';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][1] = 'Välj det här alternativet för att sortera litteraturlistan efter författare.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['0'] = 'Sorteringsordning';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['1'] = 'Välj sorteringsordning för litteraturlistan.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][0] = 'Stigande';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][1] = 'Välj det här alternativet för att använda stigande sorteringsordning för den valda sorteringskolumnen.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][0] = 'Fallande';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][1] = 'Välj det här alternativet för att använda fallande sorteringsordning för den valda sorteringskolumnen.';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][0] = 'Taggar';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][1] = 'Ange en eller flera kommaseparerade taggar för att endast visa litteraturreferenser som är taggade med en av dessa taggar.';
+$GLOBALS['TL_LANG']['tl_module']['pagetype']['literature'] = 'Litteraturlista';
+$GLOBALS['TL_LANG']['tl_module']['litsort_legend'] = 'Sorteringsalternativ';
+$GLOBALS['TL_LANG']['tl_module']['literature_legend'] = 'Litteraturlista';

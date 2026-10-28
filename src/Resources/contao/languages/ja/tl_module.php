@@ -1,0 +1,29 @@
+<?php
+
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][0] = '参照スタイル';
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][1] = '文献出力のレイアウトを選択してください。カスタム <em>litref_</em> レイアウトを <em>templates</em> フォルダーに追加できます。';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][0] = 'カテゴリー';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][1] = '文献リストを作成するには、1 つ以上のカテゴリを選択してください。';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][0] = 'リストのタイトル';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][1] = '文献リストのリストタイトルを入力してください。';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][0] = '並べ替えオプション';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][1] = '文献リストを並べ替えるには、このオプションを選択します。';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['0'] = '並べ替え順';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['1'] = '文献リストのソート列を選択してください。';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][0] = 'タイトル順に並べ替える';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][1] = '文献リストをタイトル順に並べ替えるには、このオプションを選択します。';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][0] = '日付順に並べ替える';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][1] = '文献リストをリリース日順に並べ替えるには、このオプションを選択します。';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][0] = '著者ごとに並べ替える';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][1] = '文献リストを著者別に並べ替えるには、このオプションを選択します。';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['0'] = '並べ替え順序';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['1'] = '文献リストの並び順を選択してください。';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][0] = '昇順';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][1] = '選択した並べ替え列の昇順の並べ替え順序を使用するには、このオプションを選択します。';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][0] = '降順';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][1] = '選択した並べ替え列の降順並べ替え順序を使用するには、このオプションを選択します。';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][0] = 'タグ';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][1] = 'これらのタグのいずれかでタグ付けされた文献参照のみを表示するには、1 つ以上のカンマ区切りのタグを入力してください。';
+$GLOBALS['TL_LANG']['tl_module']['pagetype']['literature'] = '文献リスト';
+$GLOBALS['TL_LANG']['tl_module']['litsort_legend'] = '並べ替えオプション';
+$GLOBALS['TL_LANG']['tl_module']['literature_legend'] = '文献リスト';

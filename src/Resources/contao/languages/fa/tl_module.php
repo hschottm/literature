@@ -1,0 +1,29 @@
+<?php
+
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][0] = 'سبک مرجع';
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][1] = 'لطفاً یک طرح برای خروجی ادبیات انتخاب کنید. می‌توانید طرح‌بندی‌های سفارشی <em>litref_</em> را به پوشه <em>templates</em> اضافه کنید.';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][0] = 'دسته بندی ها';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][1] = 'لطفاً یک یا چند دسته را برای ساخت فهرست ادبیات انتخاب کنید.';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][0] = 'عنوان فهرست';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][1] = 'لطفاً عنوان فهرستی را برای فهرست ادبیات وارد کنید.';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][0] = 'گزینه های مرتب سازی';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][1] = 'این گزینه را برای مرتب کردن لیست ادبیات انتخاب کنید.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['0'] = 'مرتب سازی بر اساس';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['1'] = 'لطفاً ستون مرتب سازی را برای فهرست ادبیات انتخاب کنید.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][0] = 'مرتب سازی بر اساس عنوان';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][1] = 'این گزینه را برای مرتب کردن فهرست ادبیات بر اساس عنوان انتخاب کنید.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][0] = 'مرتب سازی بر اساس تاریخ';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][1] = 'این گزینه را برای مرتب کردن فهرست ادبیات بر اساس تاریخ انتشار انتخاب کنید.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][0] = 'مرتب سازی بر اساس نویسنده';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][1] = 'این گزینه را برای مرتب کردن فهرست ادبیات بر اساس نویسنده انتخاب کنید.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['0'] = 'ترتیب مرتب سازی';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['1'] = 'لطفاً ترتیب مرتب سازی فهرست ادبیات را انتخاب کنید.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][0] = 'صعودی';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][1] = 'برای استفاده از ترتیب مرتب سازی صعودی ستون مرتب سازی انتخاب شده، این گزینه را انتخاب کنید.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][0] = 'نزولی';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][1] = 'برای استفاده از ترتیب مرتب سازی نزولی ستون مرتب سازی انتخاب شده، این گزینه را انتخاب کنید.';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][0] = 'برچسب ها';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][1] = 'لطفاً یک یا چند تگ جدا شده با کاما را وارد کنید تا فقط منابع ادبیاتی که با یکی از این تگ ها برچسب گذاری شده اند نشان داده شوند.';
+$GLOBALS['TL_LANG']['tl_module']['pagetype']['literature'] = 'فهرست منابع';
+$GLOBALS['TL_LANG']['tl_module']['litsort_legend'] = 'گزینه های مرتب سازی';
+$GLOBALS['TL_LANG']['tl_module']['literature_legend'] = 'فهرست منابع';

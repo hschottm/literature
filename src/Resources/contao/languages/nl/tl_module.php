@@ -1,0 +1,29 @@
+<?php
+
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][0] = 'Referentiestijl';
+$GLOBALS['TL_LANG']['tl_module']['lit_template'][1] = 'Kies een lay-out voor de literatuuruitvoer. U kunt aangepaste <em>literf_</em>-indelingen toevoegen aan de map <em>templates</em>.';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][0] = 'Categorieën';
+$GLOBALS['TL_LANG']['tl_module']['lit_categories'][1] = 'Selecteer een of meer categorieën om de literatuurlijst samen te stellen.';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][0] = 'Lijsttitel';
+$GLOBALS['TL_LANG']['tl_module']['lit_listtitle'][1] = 'Voer een lijsttitel in voor de literatuurlijst.';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][0] = 'Sorteer opties';
+$GLOBALS['TL_LANG']['tl_module']['lit_showsort'][1] = 'Kies deze optie om de literatuurlijst te sorteren.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['0'] = 'Sorteer op';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['1'] = 'Voor de literatuurlijst selecteert u de sorteerkolom.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][0] = 'Sorteer op titel';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['title'][1] = 'Kies deze optie om de literatuurlijst op titel te sorteren.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][0] = 'Sorteer op datum';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['released'][1] = 'Kies deze optie om de literatuurlijst te sorteren op publicatiedatum.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][0] = 'Sorteer op auteur';
+$GLOBALS['TL_LANG']['tl_module']['lit_sort']['author'][1] = 'Kies deze optie om de literatuurlijst op auteur te sorteren.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['0'] = 'Sorteervolgorde';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['1'] = 'Selecteer de sorteervolgorde van de literatuurlijst.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][0] = 'Oplopend';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['asc'][1] = 'Kies deze optie om de oplopende sorteervolgorde van de geselecteerde sorteerkolom te gebruiken.';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][0] = 'Aflopend';
+$GLOBALS['TL_LANG']['tl_module']['lit_sortorder']['desc'][1] = 'Kies deze optie om de aflopende sorteervolgorde van de geselecteerde sorteerkolom te gebruiken.';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][0] = 'Labels';
+$GLOBALS['TL_LANG']['tl_module']['lit_tags'][1] = 'Voer een of meer door komma\'s gescheiden tags in om alleen literatuurverwijzingen weer te geven die zijn getagd met een van deze tags.';
+$GLOBALS['TL_LANG']['tl_module']['pagetype']['literature'] = 'Literatuurlijst';
+$GLOBALS['TL_LANG']['tl_module']['litsort_legend'] = 'Sorteer opties';
+$GLOBALS['TL_LANG']['tl_module']['literature_legend'] = 'Literatuurlijst';
