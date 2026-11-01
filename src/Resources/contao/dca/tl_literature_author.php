@@ -4,7 +4,7 @@
  * @copyright  Helmut Schottmüller 2009-2020 <http://github.com/hschottm>
  * @author     Helmut Schottmüller (hschottm)
  * @package    hschottm/contao-literature
- * @license    LGPL-3.0+, CC-BY-NC-3.0
+ * @license    LGPL-3.0-or-later
  * @see	      https://github.com/hschottm/literature
  */
 

@@ -37,3 +37,8 @@ Custom `.html5` template overrides must be converted to Twig. The supplied
 reference template is `litref_standard.html.twig`; list and search templates
 are `mod_literaturelist.html.twig` and `mod_literaturesearch.html.twig`.
 The insert tag remains `{{insert_literature::123}}`.
+
+## License
+
+This extension is licensed under the GNU Lesser General Public License, version 3
+or (at your option) any later version (`LGPL-3.0-or-later`). See [LICENSE](LICENSE).
