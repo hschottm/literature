@@ -14,19 +14,11 @@ You can use the literature reference editor in the backend to enter and group yo
 The literature references can be displayed in the frontend with the help of a literature list module for literature references. The output style of the literature references can be defined using your own templates. Literature references can be tagged if the hschottm/tags Contao bundle is installed. The list output can be filtered with tags.
 Single literature references can be displayed everywhere in the frontend (e.g. articles) using the insert tag insert_literature. The module literature search is a filter module that filters literature lists by matching search terms.
 
-## Release history
+## Changelog
 
-### Contao 5.7 support
+See [CHANGELOG.md](CHANGELOG.md) for changes grouped by release tag.
 
-* Added support for Contao 5.7 and PHP 8.3 or newer.
-* Migrated all supplied templates to Twig.
-* Preserved existing literature references and author/editor records during the update. Missing author sort values are filled automatically without overwriting existing values.
-* Updated optional tag editing and filtering for the Contao 5.7-compatible `hschottm/tags` extension.
-* Added independent pagination for each literature list on a page.
-* Updated image rendering and file downloads for Contao 5.7.
-* Improved BibTeX imports: files are validated before database changes are made, and temporary uploads are removed even if an import fails.
-
-### Updating existing installations
+## Updating existing installations
 
 Run the Contao database migrations after updating the extension, using the
 Contao Manager or the command line:
