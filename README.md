@@ -1,3 +1,5 @@
+![Contao Literature](logo.svg)
+
 [![Latest Version on Packagist](http://img.shields.io/packagist/v/hschottm/contao-literature.svg?style=flat)](https://packagist.org/packages/hschottm/contao-literature)
 [![Installations via composer per month](http://img.shields.io/packagist/dm/hschottm/contao-literature.svg?style=flat)](https://packagist.org/packages/hschottm/contao-literature)
 [![Installations via composer total](http://img.shields.io/packagist/dt/hschottm/contao-literature.svg?style=flat)](https://packagist.org/packages/hschottm/contao-literature)
@@ -42,3 +44,11 @@ The insert tag remains `{{insert_literature::123}}`.
 
 This extension is licensed under the GNU Lesser General Public License, version 3
 or (at your option) any later version (`LGPL-3.0-or-later`). See [LICENSE](LICENSE).
+
+## Package icon
+
+The scalable [logo.svg](logo.svg) shows a document with a raised [1] citation
+marker on an anthracite background with an orange corner. All shapes are vector paths.
+For display in the Contao Manager, the logo is maintained separately in
+[contao/package-metadata](https://github.com/contao/package-metadata) under
+`meta/hschottm/contao-literature/logo.svg`.
